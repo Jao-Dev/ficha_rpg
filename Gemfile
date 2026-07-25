@@ -41,21 +41,21 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # security
-gem 'audited'
-gem 'devise'
-gem 'pundit'
+gem "audited"
+gem "devise"
+gem "pundit"
 
 # support
-gem 'anyway_config'
-gem 'haml-rails'
-gem 'simple_form'
+gem "anyway_config"
+gem "haml-rails"
+gem "simple_form"
 
 # infrastructure support'
-gem 'strong_migrations'
+gem "strong_migrations"
 
 # project specifics
-gem 'active_storage_validations'
-gem 'valid_email'
+gem "active_storage_validations"
+gem "valid_email"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,24 +70,24 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'capybara'
-  gem 'dotenv-rails'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'haml_lint', require: false
-  gem 'pry-rails'
-  gem 'pundit-matchers'
-  gem 'rspec-rails'
-  gem 'rubocop'
-  gem 'valid_attribute'
+  gem "capybara"
+  gem "dotenv-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "haml_lint", require: false
+  gem "pry-rails"
+  gem "pundit-matchers"
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "valid_attribute"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'better_errors'
-  gem 'dead_end'
-  gem 'letter_opener'
-  gem 'ruby-lsp-rspec'
-  gem 'ruby-lsp', require: false
+  gem "better_errors"
+  gem "dead_end"
+  gem "letter_opener"
+  gem "ruby-lsp-rspec"
+  gem "ruby-lsp", require: false
 end

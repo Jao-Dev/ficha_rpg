@@ -3,4 +3,3 @@ class Character < ApplicationRecord
 
   validates :name, :race, :ativo, presence: true
 end
-

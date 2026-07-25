@@ -3,7 +3,7 @@ require 'factory_bot'
 FactoryBot.define do
   factory :user do
     name { Faker::Name.name }
-    email { "#{name.parameterize(separator: '.')}@ficha_rpg.com"}
+    email { "#{name.parameterize(separator: '.')}@ficha_rpg.com" }
   end
 
   factory :character do

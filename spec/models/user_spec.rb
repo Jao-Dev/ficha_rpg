@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe User do
   describe 'Validacoes' do
-      it { is_expected.not_to have_valid(:name).when(nil, '')}
-      it { is_expected.not_to have_valid(:email).when(nil, '')}
+      it { is_expected.not_to have_valid(:name).when(nil, '') }
+      it { is_expected.not_to have_valid(:email).when(nil, '') }
   end
 
   describe 'Criando novo usuário' do

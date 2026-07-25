@@ -3,4 +3,3 @@ class Campaign < ApplicationRecord
 
   validates :master, :ativo, presence: true
 end
-
