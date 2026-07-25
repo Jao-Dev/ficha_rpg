@@ -25,5 +25,14 @@ describe Character do
       )
       expect(character).not_to be_valid
     end
+
+    it 'arquivo inválido sem extensão' do
+      character = build(:character)
+      character.avatar.attach(
+        io: Rails.root.join('spec/resources/pdf-sem-extensao').open,
+        filename: 'pdf-sem-extensao'
+      )
+      expect(character).not_to be_valid
+    end
   end
 end
