@@ -97,3 +97,31 @@ Criação de um projeto de ficha de rpg na linguagem ruby que:
         volumes:
           postgres-data:
         ```
+
+# Plano de ação
+
+1. Começar pelo back-end:
+    1. Criar o projeto, adicionar as variáveis para conectar com o banco de dados;
+    2. Adicionar as gems que serão usadas;
+    3. Criar o banco de dados e as tabelas;
+    4. Adicionar os relacionamento entre as tabelas;
+    5. Criar a lógica de negócio e as validações necessárias.
+2. Criar os controllers:
+    1. Criar as lógicas dos controllers;
+    2. Criar as rotas necessárias para o funcionamento;
+    3. Adicionar as permissões:
+        1. acesso a páginas;
+        2. modificação de elementos/personagens.
+3. Criar as views:
+    1. Tela de login:
+        1. E-mail, senha, recuperação de senha e cadastro.
+    2. Tela principal:
+        1. Lista de personagens.
+    3. Tela de personagem:
+        1. Ficha do personagem;
+        2. Campanha ativa.
+    4. Tela da campanha:
+        1. Nome do mestre;
+        2. Data de início;
+        3. Status (ativa/inativa);
+        4. Lista de personagens na campanha.
