@@ -10,6 +10,8 @@ FactoryBot.define do
     name { 'Yudmit Longfeet' }
     race { 'Dwarf' }
     ativo { true }
+    user
+    campaign
 
     trait :inativo do
       ativo { false }

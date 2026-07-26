@@ -90,4 +90,5 @@ group :development do
   gem "letter_opener"
   gem "ruby-lsp-rspec"
   gem "ruby-lsp", require: false
+  gem "lefthook"
 end
