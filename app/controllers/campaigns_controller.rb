@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
-  def create
+  def show
   end
 
-  def destroy
+  def create
   end
 end
