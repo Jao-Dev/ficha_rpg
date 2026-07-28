@@ -7,7 +7,7 @@ describe Character do
       it { is_expected.not_to have_valid(:ativo).when(nil, '') }
   end
 
-  describe 'validar imagem do avatar' do
+  describe 'validar o avatar no banco' do
     it 'sendo imagem PNG' do
       character = build(:character)
       character.avatar.attach(
@@ -15,8 +15,11 @@ describe Character do
         filename: 'dummy.png'
       )
       expect(character).to be_valid
+      expect(character.avatar).not_to be_nil
     end
+  end
 
+  describe 'validar imagem do avatar' do
     it 'sendo imagem HEIC' do
       character = build(:character)
       character.avatar.attach(

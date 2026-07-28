@@ -91,4 +91,5 @@ group :development do
   gem "ruby-lsp-rspec"
   gem "ruby-lsp", require: false
   gem "lefthook"
+  gem "binding_of_caller"
 end
