@@ -38,5 +38,8 @@ module FichaRpg
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.available_locales = %i[en pt-BR]
+    config.i18n.default_locale = :'pt-BR'
   end
 end
