@@ -11,19 +11,19 @@ Ficha de RPG em Ruby/Rails:
 4. Campanha: **mestre, data de criação, ativo**; vinculada a vários personagens (jogadores).
 5. Banco: **PostgreSQL** (o doc original tinha um compose.yml; hoje a conexão é via `.env`).
 
-## Estado atual (verificado em 11/11/2026)
+## Estado atual (verificado em 12/11/2026)
 
 - **Devise**: login, cadastro e logout funcionando (specs verdes), com UI pt-BR e controller custom `Users::SessionsController`. Pendente: ativar `:confirmable` (e-mail de confirmação) e specs para recuperação de senha (`:recoverable` já no model).
-- **Characters**: tabela com `name/race/ativo` + FKs `user/campaign` (migration `create_relationships`); `has_one_attached :avatar` e validações de content-type no model — mas falta a anexação no formulário/flow e checar typo `spoofin_protection` (deveria ser `spoofing_protection`?).
+- **Characters**: tabela com `name/race/ativo` + FKs `user/campaign`; `has_one_attached :avatar` e validações de content-type no model (checar typo `spoofin_protection` — deveria ser `spoofing_protection`?). `root` agora é `characters#index` listando os personagens do usuário logado (`authenticate_user!` + `has_many :characters` no User).
 - **Campaigns**: tabela com `master/ativo`.
-- **Controllers**: `UsersController` (index/create/update/destroy vazios), `CharactersController` (show/create/update/destroy vazios), `CampaignsController` (show/create vazios). `UsersController` protegido por `authenticate_user!`; characters/campaigns ainda não.
+- **Controllers**: `UsersController` (index/create/update/destroy vazios), `CharactersController` (index implementado; show/create/update/destroy vazios), `CampaignsController` (show/create vazios) — campaigns ainda sem `authenticate_user!`.
 - **Pundit**: instalado, só `ApplicationPolicy` — sem policies de domínio.
-- **Views**: devise pt-BR, `users/index` (placeholder "Logado com sucesso!") e `users/show` vazio. Faltam todas as telas de personagem/campanha.
-- **Rotas**: `resources :users` → `characters` (show/create/update/destroy); `resources :campaigns` (show/create); `root users#show` (show não existe no controller — decisão pendente).
+- **Views**: devise pt-BR, `characters/index` (lista de nomes), `users/index` (placeholder "Logado com sucesso!") e `users/show` vazio. Faltam telas de ficha do personagem/campanha.
+- **Rotas**: `root "characters#index"`; `resources :users` → `characters` (show/create/update/destroy); `resources :campaigns` (show/create).
 
 ## Backlog (ordem sugerida — TDD)
 
-1. **Rotas/controllers**: decidir `root` (show de usuário vs index) e actions faltantes; proteger `CharactersController` e `CampaignsController` com `authenticate_user!`.
+1. ~~**Rotas/controllers**: decidir `root` (decidido: `characters#index`)~~; proteger `CampaignsController` com `authenticate_user!`.
 2. **Personagem**: specs para show/create/update/destroy + views (ficha do personagem, upload de avatar com Active Storage).
 3. **Campanha**: specs para show/create + views (mestre, data, status, lista de personagens/jogadores).
 4. **Pundit**: policies de acesso (páginas e modificação de personagens — dono vs mestre).
