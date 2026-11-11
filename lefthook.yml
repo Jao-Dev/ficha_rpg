@@ -1,0 +1,9 @@
+pre-commit:
+  commands:
+    rubocop:
+      run: bundle exec ruby "$(bundle show rubocop)/exe/rubocop"
+
+post-commit:
+  commands:
+    rubocop:
+      run: bundle exec ruby "$(bundle show rubocop)/exe/rubocop"
