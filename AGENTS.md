@@ -23,6 +23,7 @@
 - App em pt-BR: os specs de feature esperam textos de UI em português (ex.: 'Entrar', 'Cadastrar-se').
 - Specs de feature em português, às vezes deixados WIP pelo usuário; são a fonte de verdade (TDD).
 - Ao acessar (ler, escrever ou listar) qualquer pasta fora do projeto, perguntar antes ao usuário.
+- PRs são criados manualmente pelo usuário; o fluxo de "subir alterações" termina no push + link do PR (ver skill `subir-alteracoes`).
 
 ## Aprendizado contínuo
 
