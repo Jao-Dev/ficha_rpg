@@ -24,6 +24,12 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+    <% end %>
+    <% flash.each do |type, message| %>
+      <div class="<%= type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

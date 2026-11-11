@@ -24,7 +24,16 @@
 ## Modelagem de dados
 
 - Antes de qualquer alteração de banco/modelagem (colunas, tabelas, relacionamentos, migrations), apresentar as opções de solução (prós/contras) e perguntar ao usuário para decidir antes de implementar.
+## Comandos e ambiente do projeto
+
+- Testes: `bundle exec rspec` (não existe `bin/rspec`).
+- RuboCop: `bundle exec ruby "$(bundle show rubocop)/exe/rubocop"` — o `rubocop` do PATH é um shim do Mason que conflita com o bundle.
+- App em pt-BR: os specs de feature esperam textos de UI em português (ex.: 'Entrar', 'Cadastrar-se').
+- Specs de feature em português, às vezes deixados WIP pelo usuário; são a fonte de verdade (TDD).
+- Ao acessar (ler, escrever ou listar) qualquer pasta fora do projeto, perguntar antes ao usuário.
+- PRs são criados manualmente pelo usuário; o fluxo de "subir alterações" termina no push + link do PR (ver skill `subir-alteracoes`).
 
 ## Aprendizado contínuo
 
 - Atualizar este arquivo sempre que aprender algo relevante sobre como o usuário escreve ou pede código (preferências, padrões, correções de rota).
+- Planejamento do projeto: manter e consultar `.opencode/planejamento.md` (atualizá-lo conforme tarefas forem concluídas).
