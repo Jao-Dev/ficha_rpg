@@ -27,7 +27,8 @@ git diff   # revisar o que mudou em arquivos rastreados
 - Mensagens em português, estilo conventional commits: `feat: ...`, `chore: ...`.
 - Separar por natureza quando fizer sentido (ex.: um commit `feat` com código e um `chore` com docs/meta).
 - `git add` por grupos (nunca `git add .` às cegas): código, depois docs.
-- Os hooks do lefthook podem rodar lint/validação no commit; se falharem, corrigir e criar novo commit.
+- Lefthook roda o RuboCop em `pre-commit` (bloqueia o commit em caso de ofensa) e `post-commit`; só fazer push com ambos verdes.
+- Detalhe do config (omakase): `Style/StringLiterals` só inspeciona `app/**/*` e o departamento `Lint` está desativado — ofensas fora de `app/` vêm de outros cops.
 
 ## Passo 4 — Push
 
