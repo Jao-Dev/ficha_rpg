@@ -94,3 +94,5 @@ group :development do
   gem "lefthook"
   gem "binding_of_caller"
 end
+
+gem "devise-i18n", "~> 1.16"

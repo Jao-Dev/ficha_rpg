@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        name: Nome
+        email: Email
+        password_confirmation: Confirmar senha
+  devise:
+    failure:
+      invalid: Senha incorreta.
+      not_found_in_database: Email não encontrado.
