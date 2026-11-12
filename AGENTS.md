@@ -11,7 +11,7 @@
 - Sempre começar pela escrita do teste antes da implementação (red → green → refactor).
 - Após terminar de implementar, sempre rodar os testes para validar a mudança antes de reportar concluído.
 - Rodar também lint/typecheck quando disponível (ex.: `rubocop`, `rspec`).
-- Ao final das implementações, gerar o diff lado a lado em HTML (fundo preto, removidos em vermelho, adicionados em verde) com `ruby .opencode/scripts/diff_lado_a_lado.rb` e abrir com `xdg-open .opencode/mudancas.html`. O arquivo é sobrescrito a cada rodada.
+- Ao final das implementações, gerar as mudanças em markdown (blocos ```diff, verde/vermelho estilo git) com `ruby .opencode/scripts/diff_mudancas.rb` — gera `.opencode/mudancas.md`, sobrescrito a cada rodada. Com working tree limpo, mostra o diff do último commit.
 
 ## Estilo de código
 
@@ -29,7 +29,7 @@
 ## Comandos e ambiente do projeto
 
 - Sistema: Arch Linux; banco PostgreSQL em Docker (`~/Docker/postgresql`, ver skill `subir-postgres`).
-- Diff: HTML lado a lado gerado por `.opencode/scripts/diff_lado_a_lado.rb` em `.opencode/mudancas.html` (sobrescrito a cada rodada; fundo preto, vermelho = removido, verde = adicionado). Abrir com `xdg-open`.
+- Diff: markdown com blocos ```diff gerado por `.opencode/scripts/diff_mudancas.rb` em `.opencode/mudancas.md` (sobrescrito a cada rodada; working tree sujo = mudanças pendentes, limpo = último commit).
 - Testes: `bundle exec rspec` (não existe `bin/rspec`).
 - RuboCop: `bundle exec ruby "$(bundle show rubocop)/exe/rubocop"` — o `rubocop` do PATH é um shim do Mason que conflita com o bundle.
 - App em pt-BR: os specs de feature esperam textos de UI em português (ex.: 'Entrar', 'Cadastrar-se').
