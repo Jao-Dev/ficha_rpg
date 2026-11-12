@@ -27,10 +27,12 @@
 ## Comandos e ambiente do projeto
 
 - Testes: `bundle exec rspec` (não existe `bin/rspec`).
+- CI completo (RuboCop + RSpec + cobertura): `./ci.sh` — rodar sempre antes de subir alterações. Cobertura configurada em `spec/spec_helper.rb` (piso de 100% linhas/branches).
 - RuboCop: `bundle exec ruby "$(bundle show rubocop)/exe/rubocop"` — o `rubocop` do PATH é um shim do Mason que conflita com o bundle.
 - App em pt-BR: os specs de feature esperam textos de UI em português (ex.: 'Entrar', 'Cadastrar-se').
 - Specs de feature em português, às vezes deixados WIP pelo usuário; são a fonte de verdade (TDD).
 - Ao acessar (ler, escrever ou listar) qualquer pasta fora do projeto, perguntar antes ao usuário.
+- Se o usuário pedir para alterar um trecho de código sem indicar o arquivo, perguntar em qual arquivo está antes de procurar no projeto.
 - PRs são criados manualmente pelo usuário; o fluxo de "subir alterações" termina no push + link do PR (ver skill `subir-alteracoes`).
 
 ## Aprendizado contínuo
