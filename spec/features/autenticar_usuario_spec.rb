@@ -8,12 +8,14 @@ feature 'autenticar usuário' do
   end
 
   scenario 'logar com sucesso' do
-    logar_como_usuario
-    expect(page).to have_content 'Logado com sucesso!'
+    user = User.create!(name: 'teste', email: 'teste@gmail.com', password: 'teste123')
+    logar_como user
+    expect(page).to have_content 'Login efetuado com sucesso.'
   end
 
   scenario 'fazer logout' do
-    logar_como_usuario
+    user = User.create!(name: 'teste', email: 'teste@gmail.com', password: 'teste123')
+    logar_como user
     expect(page).to have_button 'Log out'
     click_button 'Log out'
     expect(page).to have_content 'Entrar'
@@ -30,7 +32,7 @@ feature 'autenticar usuário' do
     fill_in 'Confirmar senha', with: novo_usuario.password
     click_button 'Cadastrar'
 
-    expect(page).to have_content 'Logado com sucesso!'
+    expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
   end
 
   scenario 'mensagem de erro ao errar ou deixar a senha em branco' do
@@ -59,16 +61,5 @@ feature 'autenticar usuário' do
     fill_in 'Senha', with: 'teste123'
     click_button 'Entrar'
     expect(page).to have_content 'Email não encontrado.'
-  end
-
-  private
-
-  def logar_como_usuario
-    user = User.create!(name: 'teste', email: 'teste@gmail.com', password: 'teste123')
-
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: user.password
-    click_button 'Entrar'
   end
 end

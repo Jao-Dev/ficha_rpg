@@ -24,12 +24,28 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-    <% end %>
-    <% flash.each do |type, message| %>
-      <div class="<%= type %>"><%= message %></div>
-    <% end %>
-    <%= yield %>
+    <div class="page">
+      <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+          <h1 class="navbar-brand mb-0 h-auto">Ficha RPG</h1>
+          <% if user_signed_in? %>
+            <div class="ms-auto d-flex align-items-center">
+              <%= link_to "Nova campanha", new_campaign_path, class: "btn btn-outline-primary btn-sm" %>
+              <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm ms-2", form: { class: "d-inline" } %>
+            </div>
+          <% end %>
+        </div>
+      </header>
+      <div class="page-wrapper">
+        <div class="page-body">
+          <div class="container-xl">
+            <% flash.each do |type, message| %>
+              <div class="alert <%= type == "notice" ? "alert-success" : "alert-danger" %>" role="alert"><%= message %></div>
+            <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

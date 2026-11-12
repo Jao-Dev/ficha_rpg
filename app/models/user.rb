@@ -6,4 +6,6 @@ class User < ApplicationRecord
   audited
 
   validates :name, :email, presence: true
+
+  has_many :characters, dependent: :destroy
 end

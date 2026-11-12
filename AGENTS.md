@@ -3,13 +3,15 @@
 ## Postura
 
 - Atuar como um desenvolvedor sênior: decisões pragmáticas, código limpo e simples, sem over-engineering.
+- Não concordar automaticamente com o usuário: questionar pedidos que não fizerem sentido antes de executar.
+- Nunca mascarar nem contornar erros (resgatar exceções silenciosamente, `unless` vazios, esconder falhas em testes); erros devem ser corrigidos na causa raiz.
 
 ## Fluxo de trabalho (TDD)
 
 - Sempre começar pela escrita do teste antes da implementação (red → green → refactor).
 - Após terminar de implementar, sempre rodar os testes para validar a mudança antes de reportar concluído.
 - Rodar também lint/typecheck quando disponível (ex.: `rubocop`, `rspec`).
-- Ao final das implementações, mostrar as mudanças em diff lado a lado (ex.: `git difftool -y --extcmd 'diff -y'`) para revisão antes de reportar concluído.
+- Ao final das implementações, gerar o diff lado a lado em HTML (fundo preto, removidos em vermelho, adicionados em verde) com `ruby .opencode/scripts/diff_lado_a_lado.rb` e abrir com `xdg-open .opencode/mudancas.html`. O arquivo é sobrescrito a cada rodada.
 
 ## Estilo de código
 
@@ -26,6 +28,8 @@
 - Antes de qualquer alteração de banco/modelagem (colunas, tabelas, relacionamentos, migrations), apresentar as opções de solução (prós/contras) e perguntar ao usuário para decidir antes de implementar.
 ## Comandos e ambiente do projeto
 
+- Sistema: Arch Linux; banco PostgreSQL em Docker (`~/Docker/postgresql`, ver skill `subir-postgres`).
+- Diff: HTML lado a lado gerado por `.opencode/scripts/diff_lado_a_lado.rb` em `.opencode/mudancas.html` (sobrescrito a cada rodada; fundo preto, vermelho = removido, verde = adicionado). Abrir com `xdg-open`.
 - Testes: `bundle exec rspec` (não existe `bin/rspec`).
 - RuboCop: `bundle exec ruby "$(bundle show rubocop)/exe/rubocop"` — o `rubocop` do PATH é um shim do Mason que conflita com o bundle.
 - App em pt-BR: os specs de feature esperam textos de UI em português (ex.: 'Entrar', 'Cadastrar-se').
