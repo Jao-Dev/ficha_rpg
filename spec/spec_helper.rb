@@ -13,6 +13,47 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'simplecov'
+
+SimpleCov.start do
+  skip '/spec/'
+  skip '/config/'
+  group 'Models', 'app/models'
+  group 'Controllers', 'app/controllers'
+  group 'Policies', 'app/policies'
+  group 'Helpers', 'app/helpers'
+  group 'Jobs', 'app/jobs'
+  group 'Mailers', 'app/mailers'
+
+  coverage(:line) { minimum 100, per: group('Models') }
+  coverage(:line) { minimum 100, per: group('Controllers') }
+  coverage(:line) { minimum 100, per: group('Policies') }
+  coverage(:line) { minimum 100, per: group('Helpers') }
+  coverage(:line) { minimum 100, per: group('Jobs') }
+  coverage(:line) { minimum 100, per: group('Mailers') }
+  coverage(:branch) { minimum 100 }
+
+  at_exit do
+    puts 'Cobertura de linhas por grupo:'
+    SimpleCov.result.groups.each do |name, group|
+      printf "  %-12s %6.2f%%\n", name, group.covered_percent
+      next if group.covered_percent >= 100
+
+      group.each do |file|
+        next if file.missed_lines.empty? && file.missed_branches.empty?
+
+        printf "    %s\n", file.filename.sub("#{Dir.pwd}/", '')
+        unless file.missed_lines.empty?
+          puts "      linhas não testadas: #{file.missed_lines.map(&:line_number).join(', ')}"
+        end
+        unless file.missed_branches.empty?
+          puts "      branches não testados: #{file.missed_branches.map(&:report_line).uniq.join(', ')}"
+        end
+      end
+    end
+  end
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

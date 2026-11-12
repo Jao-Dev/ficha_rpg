@@ -78,6 +78,7 @@ group :development, :test do
   gem "pry-rails"
   gem "pundit-matchers"
   gem "rspec-rails"
+  gem "simplecov"
   gem "rubocop"
   gem "selenium-webdriver"
   gem "valid_attribute"
