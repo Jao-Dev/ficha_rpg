@@ -22,6 +22,7 @@ Ficha de RPG em Ruby/Rails:
 - **Campanha**: `campaigns.master` agora é `belongs_to :master` (User); **o criador da campanha se torna o mestre** ('Nova campanha' cria direto via POST, sem formulário). Ficha exibe mestre, status, data e personagens (specs verdes).
 - **Pundit + roles**: `users.role` enum `%i[jogador mestre admin]` (default jogador). `CharacterPolicy`: dono faz tudo no próprio personagem, mestre da campanha só `show`, admin tudo, demais nada; `CampaignPolicy`: `show`/`create` a qualquer logado. `ApplicationPolicy` com `admin?` + spec de deny-by-default; controllers com `authorize` + `verify_authorized`; resgate de `Pundit::NotAuthorizedError` → alerta "Você não tem acesso a esta página.". Convites de campanha ficam para depois.
 - **Devise (confirmação e recuperação)**: `:confirmable` ativo — cadastro envia e-mail de confirmação e o login exige conta confirmada (factory confirma por padrão; trait `:sem_confirmacao` para os specs de confirmação). Recuperação de senha coberta por specs (envio de instruções → redefinição → login). Remetente `noreply@ficharpg.com` no devise.rb. `Users::RegistrationsController` com redirect pós-cadastro inativo. YAML column do ActiveRecord permite TimeWithZone/TimeZone (audit com confirmed_at). Pendência: SMTP de produção.
+- **Alternância de personagens**: seletor no header (dropdown `<details>` do Tabler) — nome do usuário e, embaixo, o personagem em uso entre parênteses. Seleção em `session[:character_id]` (limpa no logout); action `alternar` em `CharactersController` (member POST) com `alternar?` na policy (dono/admin). `characters.ativo` = presença em campanha ativa (não é perfil em uso).
 - **Specs**: helpers de front-end (UiHelper/TablerFormBuilder) já documentados em `docs/`. Specs de feature no padrão `let`/`let!` + `describe` por fluxo (convenção na skill `testes-rspec`).
 - **Specs helpers**: `logar_como` em `spec/support/feature_helpers.rb` (auto-requerido pelo rails_helper). Locale pt-BR de attributes do Character em `config/locales/pt-BR.yml`.
 - **CI e cobertura**: SimpleCov configurado em `spec/spec_helper.rb` (piso de 100% linhas/branches) e script `./ci.sh` (RuboCop + RSpec + cobertura) — rodar antes de subir alterações.
@@ -33,9 +34,15 @@ Ficha de RPG em Ruby/Rails:
 3. ~~Campanha (show/create + views)~~ (concluído em 12/11/2026).
 4. ~~Pundit~~ (concluído em 13/11/2026 — dono/mestre/admin; mestre agora é User da campanha).
 5. ~~Devise (confirmação e recuperação de senha)~~ (concluído em 13/11/2026; pendência: SMTP de produção e telas do Devise no padrão Tabler).
-6. **Alternância de personagens** (perfis): seleção do personagem ativo por sessão.
+6. ~~**Alternância de personagens** (perfis)~~ (concluído em 13/11/2026): seletor no header com nome do usuário e, entre parênteses, o personagem em uso; seleção guardada em `session[:character_id]` (nada no banco); `characters.ativo` significa presença em campanha ativa, não perfil em uso.
 7. **Convites de campanha**: vincular jogadores/mestre às campanhas; na edição da campanha, incluir adição/remoção de personagens/jogadores (pedido em 13/11/2026).
 8. **Exclusão de campanha com aviso**: ao excluir, usuários da campanha recebem aviso de que ela será deletada em 2 dias; soft delete da campanha (flag) + job que efetiva a deleção após o período (pedido em 13/11/2026, junto com os convites).
+
+## Pendências
+
+- SMTP de produção.
+- Telas do Devise no padrão Tabler.
+- Tela para ver e selecionar as campanhas (pedido em 13/11/2026).
 
 ## Convenções do projeto
 
