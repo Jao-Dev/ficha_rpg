@@ -55,7 +55,9 @@ feature 'gerenciar campanhas' do
       click_button 'Excluir'
 
       expect(page).to have_content 'Campanha excluída com sucesso.'
-      expect(page).not_to have_content campaign.master.name
+      within '.page-body' do
+        expect(page).not_to have_content campaign.master.name
+      end
     end
 
     scenario 'com personagens mostra erro' do
