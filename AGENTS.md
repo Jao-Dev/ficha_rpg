@@ -8,6 +8,7 @@
 
 ## Fluxo de trabalho (TDD)
 
+- Antes de começar a mexer no código, dar `git pull` na `develop` e rodar `bundle install`.
 - Sempre começar pela escrita do teste antes da implementação (red → green → refactor).
 - Após terminar de implementar, sempre rodar os testes para validar a mudança antes de reportar concluído.
 - Rodar também lint/typecheck quando disponível (ex.: `rubocop`, `rspec`).
