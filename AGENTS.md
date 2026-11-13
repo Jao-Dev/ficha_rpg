@@ -28,6 +28,7 @@
 - Mensagens de commit com corpo: além do título conventional commit, incluir resumo dos pontos mais importantes da mudança — esse resumo serve a quem for olhar o PR.
 - Atualizações de gems ou qualquer outra coisa do sistema/ambiente devem ir em uma branch separada (ex.: `chore/atualizar`), subida sozinha — somente as atualizações, sem outras mudanças. Usar conventional commits.
 - Nunca commitar por conta própria: sempre apresentar o que pretende commitar e perguntar ao usuário antes — commits só quando ele aprovar ou pedir explicitamente.
+- Se o usuário aprovar o commit, mergear o PR direto (merge commit), com `./ci.sh` verde e checks do GitHub passando, seguido da skill `limpar-branches`.
 
 ## Modelagem de dados
 

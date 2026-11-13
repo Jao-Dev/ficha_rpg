@@ -53,5 +53,5 @@ git push -u origin <branch>
 
 ## Passo 6 — Finalizar
 
-- **Não criar PR** — o usuário prefere fazê-lo manualmente.
-- Reportar: branch criada, commits feitos e o link sugerido pelo remote para abrir o PR (`https://github.com/Jao-Dev/ficha_rpg/pull/new/<branch>`).
+- Se o usuário aprovou o commit, mergear o PR direto (`gh pr merge <número>` — merge commit), com `./ci.sh` verde e checks do GitHub passando; depois rodar a skill `limpar-branches`.
+- Reportar: branch criada, commits feitos e o resultado do merge.
