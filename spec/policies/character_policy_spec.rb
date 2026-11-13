@@ -21,8 +21,9 @@ describe CharacterPolicy do
   end
 
   describe 'admin' do
-    let(:user) { create(:user, role: :admin) }
+    let(:admin) { create(:user, :admin) }
     let(:character) { create(:character, user: create(:user)) }
+    subject(:policy) { described_class.new(admin, character) }
 
     it { is_expected.to permit_actions(%i[show edit update destroy create]) }
   end

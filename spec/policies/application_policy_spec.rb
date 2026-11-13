@@ -16,9 +16,9 @@ describe ApplicationPolicy do
 
   describe 'admin?' do
     it 'verdadeiro para admin' do
-      user = create(:user, role: :admin)
+      admin = create(:user, :admin)
 
-      expect(described_class.new(user, nil).send(:admin?)).to be(true)
+      expect(described_class.new(admin, nil).send(:admin?)).to be(true)
     end
 
     it 'falso sem usuário' do

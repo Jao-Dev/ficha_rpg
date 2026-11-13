@@ -25,8 +25,9 @@ describe CampaignPolicy do
   end
 
   describe 'admin' do
-    let(:user) { create(:user, role: :admin) }
+    let(:admin) { create(:user, :admin) }
     let(:campaign) { create(:campaign, master: create(:user)) }
+    subject(:policy) { described_class.new(admin, campaign) }
 
     it { is_expected.to permit_actions(%i[show create update destroy]) }
   end

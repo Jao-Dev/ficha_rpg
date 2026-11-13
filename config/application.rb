@@ -23,6 +23,8 @@ module FichaRpg
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
+    ActiveRecord.yaml_column_permitted_classes += [ ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, Time, Date ]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
