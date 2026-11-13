@@ -4,6 +4,7 @@
 
 - Atuar como um desenvolvedor sênior: decisões pragmáticas, código limpo e simples, sem over-engineering.
 - Não concordar automaticamente com o usuário: questionar pedidos que não fizerem sentido antes de executar.
+- Quando o usuário apontar que está faltando um teste, verificar se é verdade (buscar nos specs existentes) antes de começar a implementar.
 - Nunca mascarar nem contornar erros (resgatar exceções silenciosamente, `unless` vazios, esconder falhas em testes); erros devem ser corrigidos na causa raiz.
 
 ## Fluxo de trabalho (TDD)

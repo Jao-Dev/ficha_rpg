@@ -19,6 +19,7 @@ Stack de testes: RSpec + FactoryBot + Faker + Capybara (selenium) + Devise + Aud
 - Dados dos cenários de feature com `let`/`let!` no topo da `feature` (não `create` dentro do scenario):
   - `let` para o que só fornece valores (ex.: `user`);
   - `let!` para dados que precisam existir **antes** da ação do cenário (ex.: personagens que devem aparecer na página) — `let` é lazy e criaria depois da navegação;
+  - variáveis de usuário com role específica levam o nome do papel (ex.: `admin`, `master`), não `user`;
   - nomes explícitos nos registros que podem colidir (a factory `:character` usa nome fixo).
 - Fluxos repetidos de navegação ficam no `spec/support/feature_helpers.rb` (ex.: `logar_como`) ou, se muito específicos, em métodos `private` dentro do arquivo.
 - Validações de presença em uma linha com o matcher do gem `valid_attribute`:
