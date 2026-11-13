@@ -7,8 +7,11 @@ class TablerFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def label(attribute, options = {})
-    super(attribute, **options, class: append_class("form-label", options[:class]))
+  def label(attribute, text = nil, options = {})
+    text, options = nil, text if text.is_a?(Hash)
+    options[:class] = append_class("form-label", options[:class])
+
+    super(attribute, text, options)
   end
 
   def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})

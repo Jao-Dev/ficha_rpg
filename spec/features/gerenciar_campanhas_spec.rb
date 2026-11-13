@@ -28,4 +28,45 @@ feature 'gerenciar campanhas' do
       expect(page).to have_content user.name
     end
   end
+
+  describe 'editar campanha' do
+    let(:master) { create(:user) }
+    let(:campaign) { create(:campaign, master: master) }
+
+    scenario 'com sucesso' do
+      logar_como master
+      visit campaign_path(campaign)
+      click_link 'Editar'
+      uncheck 'Ativa'
+      click_button 'Atualizar campanha'
+
+      expect(page).to have_content 'Campanha atualizada com sucesso.'
+      expect(page).to have_content 'Inativa'
+    end
+  end
+
+  describe 'excluir campanha' do
+    let(:master) { create(:user) }
+    let(:campaign) { create(:campaign, master: master) }
+
+    scenario 'com sucesso' do
+      logar_como master
+      visit campaign_path(campaign)
+      click_button 'Excluir'
+
+      expect(page).to have_content 'Campanha excluída com sucesso.'
+      expect(page).not_to have_content campaign.master.name
+    end
+
+    scenario 'com personagens mostra erro' do
+      character = create(:character, user: create(:user), campaign: campaign)
+
+      logar_como master
+      visit campaign_path(campaign)
+      click_button 'Excluir'
+
+      expect(page).to have_content 'Não foi possível excluir a campanha.'
+      expect(page).to have_content character.name
+    end
+  end
 end

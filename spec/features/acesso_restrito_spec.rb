@@ -32,6 +32,21 @@ feature 'acesso restrito' do
     expect(page).to have_content 'Você não tem acesso a esta página.'
   end
 
+  scenario 'usuário não edita campanha de outro usuário' do
+    logar_como outro_usuario
+    visit edit_campaign_path(campaign)
+
+    expect(page).to have_content 'Você não tem acesso a esta página.'
+  end
+
+  scenario 'usuário não exclui campanha de outro usuário' do
+    logar_como outro_usuario
+    visit campaign_path(campaign)
+    click_button 'Excluir'
+
+    expect(page).to have_content 'Você não tem acesso a esta página.'
+  end
+
   scenario 'mestre da campanha vê a ficha do personagem' do
     mestre = create(:user)
     campanha_do_mestre = create(:campaign, master: mestre)
