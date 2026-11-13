@@ -27,6 +27,7 @@
 - Ao trocar de branch, conferir se as outras já foram mergeadas na `develop`; se sim, apagá-las remotamente e localmente (ver skill `limpar-branches`) — manter o ambiente limpo.
 - Mensagens de commit com corpo: além do título conventional commit, incluir resumo dos pontos mais importantes da mudança — esse resumo serve a quem for olhar o PR.
 - Atualizações de gems ou qualquer outra coisa do sistema/ambiente devem ir em uma branch separada (ex.: `chore/atualizar`), subida sozinha — somente as atualizações, sem outras mudanças. Usar conventional commits.
+- Nunca commitar por conta própria: sempre apresentar o que pretende commitar e perguntar ao usuário antes — commits só quando ele aprovar ou pedir explicitamente.
 
 ## Modelagem de dados
 
