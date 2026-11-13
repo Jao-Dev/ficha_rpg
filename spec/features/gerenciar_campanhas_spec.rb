@@ -4,7 +4,8 @@ feature 'gerenciar campanhas' do
   let(:user) { create(:user) }
 
   describe 'ver a campanha' do
-    let(:campaign) { create(:campaign, master: 'Mestre boladão') }
+    let(:master) { create(:user, name: 'Mestre boladão') }
+    let(:campaign) { create(:campaign, master: master) }
     let!(:character) { create(:character, name: 'Yudmit Longfeet', user: user, campaign: campaign) }
 
     scenario 'exibe mestre, status, data e personagens' do
@@ -19,23 +20,12 @@ feature 'gerenciar campanhas' do
   end
 
   describe 'criar campanha' do
-    scenario 'com sucesso' do
+    scenario 'com sucesso e o criador se torna o mestre' do
       logar_como user
-      click_link 'Nova campanha'
-      fill_in 'Mestre', with: 'Mestre boladão'
-      click_button 'Criar campanha'
+      click_button 'Nova campanha'
 
       expect(page).to have_content 'Campanha criada com sucesso.'
-      expect(page).to have_content 'Mestre boladão'
-    end
-
-    scenario 'com mestre em branco mostra erro' do
-      logar_como user
-      click_link 'Nova campanha'
-      click_button 'Criar campanha'
-
-      expect(page).to have_content 'Não foi possível salvar a campanha.'
-      expect(page).to have_content 'Mestre não pode ficar em branco'
+      expect(page).to have_content user.name
     end
   end
 end

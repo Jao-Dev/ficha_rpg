@@ -3,5 +3,7 @@ class Campaign < ApplicationRecord
 
   has_many :characters
 
-  validates :master, :ativo, presence: true
+  belongs_to :master, class_name: "User"
+
+  validates :ativo, presence: true
 end

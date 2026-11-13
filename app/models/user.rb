@@ -9,5 +9,9 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
 
+  enum :role, { jogador: 0, mestre: 1, admin: 2 }
+
   has_many :characters, dependent: :destroy
+
+  def to_s = name
 end

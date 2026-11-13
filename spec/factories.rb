@@ -20,7 +20,7 @@ FactoryBot.define do
   end
 
   factory :campaign do
-    master { 'Mestre boladão' }
+    association :master, factory: :user
     ativo { true }
 
     trait :inativo do

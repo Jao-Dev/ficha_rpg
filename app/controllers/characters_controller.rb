@@ -1,16 +1,19 @@
 class CharactersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_character, only: [ :show, :edit, :update, :destroy ]
+  after_action :verify_authorized
 
   def show
   end
 
   def new
     @character = current_user.characters.new
+    authorize @character
   end
 
   def create
     @character = current_user.characters.new(character_params)
+    authorize @character
 
     if @character.save
       redirect_to user_character_path(current_user, @character), notice: "Personagem criado com sucesso."
@@ -40,7 +43,8 @@ class CharactersController < ApplicationController
   private
 
   def set_character
-    @character = current_user.characters.find(params[:id])
+    @character = Character.find(params[:id])
+    authorize @character
   end
 
   def character_params

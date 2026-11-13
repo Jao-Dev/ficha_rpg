@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_11_225413) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_13_000200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,8 +67,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_11_225413) do
   create_table "campaigns", force: :cascade do |t|
     t.boolean "ativo", default: true, null: false
     t.datetime "created_at", null: false
-    t.string "master", null: false
     t.datetime "updated_at", null: false
+    t.bigint "master_id", null: false
+    t.index ["master_id"], name: "index_campaigns_on_master_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -96,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_11_225413) do
     t.string "reset_password_token"
     t.datetime "updated_at", null: false
     t.datetime "remember_created_at"
+    t.integer "role", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -103,6 +105,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_11_225413) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "campaigns", "users", column: "master_id"
   add_foreign_key "characters", "campaigns"
   add_foreign_key "characters", "users"
 end
