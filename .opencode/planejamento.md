@@ -16,7 +16,8 @@ Ficha de RPG em Ruby/Rails:
 - **Devise**: login, cadastro e logout funcionando (specs verdes), com UI pt-BR e controller custom `Users::SessionsController`. Pendente: ativar `:confirmable` (e-mail de confirmação) e specs para recuperação de senha (`:recoverable` já no model).
 - **Rotas/root**: `root users#index` (lista de personagens do usuário logado); `users` restrito a `only: :index`; `CharactersController` e `CampaignsController` protegidos por `authenticate_user!`. Characters agora com `new/create/show/edit/update/destroy`.
 - **Characters**: CRUD completo com specs de feature verdes (ficha, criar com foto, erros de validação, editar, excluir). Flash de sucesso/erro em create/update/destroy. Avatar anexável via formulário. Por ora só o dono acessa (`current_user.characters.find`).
-- **Tabler (front-end)**: integrado na versão 1.7.5, vendored (sem CDN): `app/assets/stylesheets/tabler.min.css` (incluído em lote pelo `stylesheet_link_tag :app` do Propshaft 1.3) e `vendor/javascript/tabler.min.js` (importmap pin "tabler"). Layout com navbar + page-wrapper + flash estilizado (notice→alert-success, alert→alert-danger). `users/index` (card + tabela + link 'Novo personagem'), `characters/show` (card com avatar, Editar, Excluir com turbo_confirm) e formulário em `characters/_form`.
+- **Front-end (padrão Tabler + helpers)**: Tabler 1.7.5 vendored (sem CDN): `app/assets/stylesheets/tabler.min.css` (incluído em lote pelo `stylesheet_link_tag :app` do Propshaft 1.3) e `vendor/javascript/tabler.min.js` (importmap pin "tabler"). `UiHelper` (`app/helpers/ui_helper.rb`) com `card(title, actions:) { }`, `alert(kind) { }` e `btn(label, path, style:, method:, confirm:)`; `TablerFormBuilder` (`app/builders/`) é o form builder padrão (`config.action_view.default_form_builder`) e aplica `form-label`/`form-control`/`form-select`/`btn btn-primary` sozinho — views não repetem classes. Devise segue com simple_form (não afetado).
+- **Views**: 100% Haml — nenhum `.erb` no projeto (Devise, layouts, mailers e PWA convertidos). `.haml-lint.yml`: LineLength 120, IdNames off (convenção do Devise).
 - **Cuidado com assets**: `public/assets/.manifest.json` é precompile commitado; o Propshaft resolve por ele — ao adicionar assets novos, rodar `bin/rails assets:precompile` (havia manifest velho de agosto que quebrou o load do Tabler).
 - **Campaigns**: tabela com `master/ativo`.
 - **Pundit**: instalado, só `ApplicationPolicy` — sem policies de domínio.
@@ -26,7 +27,7 @@ Ficha de RPG em Ruby/Rails:
 
 1. ~~Rotas/controllers~~ (concluído em 12/11/2026).
 2. ~~Personagem (ficha, CRUD, avatar)~~ (concluído em 12/11/2026).
-3. **Campanha**: specs para show/create + views (mestre, data, status, lista de personagens/jogadores), já no padrão Tabler.
+3. ~~Campanha (show/create + views)~~ (concluído em 12/11/2026).
 4. **Pundit**: policies de acesso (páginas e modificação de personagens — dono vs mestre).
 5. **Devise**: ativar `:confirmable` + mailer de confirmação; specs de recuperação de senha; (opcional) padronizar telas do Devise com Tabler.
 6. **Alternância de personagens** (perfis): seleção do personagem ativo por sessão.
