@@ -76,6 +76,20 @@ feature 'gerenciar personagens' do
     expect(page).not_to have_content 'Anão'
   end
 
+  scenario 'editar personagem com dados inválidos mostra erro' do
+    user = create(:user)
+    character = create(:character, user: user)
+
+    logar_como user
+    visit user_character_path(user, character)
+    click_link 'Editar'
+    fill_in 'Nome', with: ''
+    click_button 'Atualizar personagem'
+
+    expect(page).to have_content 'Não foi possível salvar o personagem.'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+  end
+
   scenario 'excluir personagem' do
     user = create(:user)
     character = create(:character, user: user)

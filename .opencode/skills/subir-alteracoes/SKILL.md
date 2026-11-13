@@ -30,13 +30,22 @@ git diff   # revisar o que mudou em arquivos rastreados
 - Lefthook roda o RuboCop em `pre-commit` (bloqueia o commit em caso de ofensa) e `post-commit`; só fazer push com ambos verdes.
 - Detalhe do config (omakase): `Style/StringLiterals` só inspeciona `app/**/*` e o departamento `Lint` está desativado — ofensas fora de `app/` vêm de outros cops.
 
-## Passo 4 — Push
+## Passo 4 — CI (antes do push)
+
+```bash
+./ci.sh
+```
+
+- Rodar RuboCop + RSpec com checagem de cobertura (SimpleCov, piso de 100% de linhas e branches em `spec/spec_helper.rb`).
+- Se falhar (teste quebrado, ofensa de RuboCop ou cobertura abaixo do piso), corrigir antes de subir. Nunca fazer push com o CI vermelho.
+
+## Passo 5 — Push
 
 ```bash
 git push -u origin <branch>
 ```
 
-## Passo 5 — Finalizar
+## Passo 6 — Finalizar
 
 - **Não criar PR** — o usuário prefere fazê-lo manualmente.
 - Reportar: branch criada, commits feitos e o link sugerido pelo remote para abrir o PR (`https://github.com/Jao-Dev/ficha_rpg/pull/new/<branch>`).

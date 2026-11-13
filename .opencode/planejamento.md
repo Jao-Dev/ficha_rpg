@@ -22,6 +22,7 @@ Ficha de RPG em Ruby/Rails:
 - **Campaigns**: tabela com `master/ativo`.
 - **Pundit**: instalado, só `ApplicationPolicy` — sem policies de domínio.
 - **Specs helpers**: `logar_como` em `spec/support/feature_helpers.rb` (auto-requerido pelo rails_helper). Locale pt-BR de attributes do Character em `config/locales/pt-BR.yml`.
+- **CI e cobertura**: SimpleCov configurado em `spec/spec_helper.rb` (piso de 100% linhas/branches) e script `./ci.sh` (RuboCop + RSpec + cobertura) — rodar antes de subir alterações.
 
 ## Backlog (ordem sugerida — TDD)
 
