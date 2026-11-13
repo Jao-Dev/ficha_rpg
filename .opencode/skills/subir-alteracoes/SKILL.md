@@ -25,7 +25,7 @@ git diff   # revisar o que mudou em arquivos rastreados
 ## Passo 3 — Commits
 
 - Mensagens em português, estilo conventional commits: `feat: ...`, `chore: ...`.
-- Separar por natureza quando fizer sentido (ex.: um commit `feat` com código e um `chore` com docs/meta).
+- **Uma natureza por branch** — nunca misturar: se houver dois `chore` e um `feat`, subir uma branch com os chores e outra com o feat. Docs seguem a mesma lógica (`docs: ...` em branch própria quando não pertencer à feature).
 - `git add` por grupos (nunca `git add .` às cegas): código, depois docs.
 - Lefthook roda o RuboCop em `pre-commit` (bloqueia o commit em caso de ofensa) e `post-commit`; só fazer push com ambos verdes.
 - Detalhe do config (omakase): `Style/StringLiterals` só inspeciona `app/**/*` e o departamento `Lint` está desativado — ofensas fora de `app/` vêm de outros cops.
