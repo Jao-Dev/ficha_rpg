@@ -1,0 +1,8 @@
+= form_with model: campaign do |f|
+  .mb-3.form-check.form-switch
+    = f.check_box :ativo, class: 'form-check-input'
+    = f.label :ativo, 'Ativa', class: 'form-check-label'
+
+  .d-flex
+    .ms-auto
+      = f.submit 'Atualizar campanha'

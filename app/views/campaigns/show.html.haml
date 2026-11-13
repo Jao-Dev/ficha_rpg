@@ -1,4 +1,6 @@
-= card @campaign.master do
+= card @campaign.master,
+  actions: [ btn('Editar', edit_campaign_path(@campaign), style: 'outline-primary'),
+             btn('Excluir', campaign_path(@campaign), style: 'outline-danger', method: :delete, confirm: 'Deseja excluir a campanha?') ] do
   .card-body
     %p= @campaign.ativo ? 'Ativa' : 'Inativa'
     %p= @campaign.created_at.strftime('%d/%m/%Y')
