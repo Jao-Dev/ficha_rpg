@@ -1,28 +1,17 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
+  after_action :verify_authorized
 
   def show
     @campaign = Campaign.find(params[:id])
-  end
-
-  def new
-    @campaign = Campaign.new
+    authorize @campaign
   end
 
   def create
-    @campaign = Campaign.new(campaign_params)
+    @campaign = Campaign.new(master: current_user)
+    authorize @campaign
 
-    if @campaign.save
-      redirect_to campaign_path(@campaign), notice: "Campanha criada com sucesso."
-    else
-      flash.now[:alert] = "Não foi possível salvar a campanha."
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  private
-
-  def campaign_params
-    params.require(:campaign).permit(:master)
+    @campaign.save!
+    redirect_to campaign_path(@campaign), notice: "Campanha criada com sucesso."
   end
 end

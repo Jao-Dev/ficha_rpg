@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
+  include Pundit::Authorization
+
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError do
+    redirect_to root_path, alert: "Você não tem acesso a esta página."
+  end
 
   def after_sign_in_path_for(resource)
     users_path

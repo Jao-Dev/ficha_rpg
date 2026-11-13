@@ -31,7 +31,7 @@ feature 'gerenciar personagens' do
       click_link 'Novo personagem'
       fill_in 'Nome', with: 'Yudmit Longfeet'
       fill_in 'Raça', with: 'Anão'
-      select campaign.master, from: 'Campanha'
+      select campaign.master.name, from: 'Campanha'
       attach_file 'Foto', Rails.root.join('spec/resources/dummies/dummy.png')
       click_button 'Criar personagem'
 

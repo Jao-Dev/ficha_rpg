@@ -24,7 +24,7 @@
           %h1.navbar-brand.mb-0.h-auto Ficha RPG
           - if user_signed_in?
             .ms-auto.d-flex.align-items-center
-              = btn 'Nova campanha', new_campaign_path, style: 'outline-primary'
+              = btn 'Nova campanha', campaigns_path, style: 'outline-primary', method: :post
               = btn 'Log out', destroy_user_session_path, style: 'outline-secondary', method: :delete
       .page-wrapper
         .page-body

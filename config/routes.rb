@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     resources :characters, only: [ :new, :create, :show, :edit, :update, :destroy ]
   end
 
-  resources :campaigns, only: [ :new, :show, :create ]
+  resources :campaigns, only: [ :show, :create ]
 end
