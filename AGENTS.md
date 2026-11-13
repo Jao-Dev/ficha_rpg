@@ -23,6 +23,7 @@
 
 ## Branches e commits
 
+- Nunca misturar naturezas: feats, chores, refactors e docs vão em branches separadas. Ex.: dois `chore` e um `feat` = uma branch com os chores e outra com o feat. Cada branch sobe sozinha, sem outras mudanças.
 - Atualizações de gems ou qualquer outra coisa do sistema/ambiente devem ir em uma branch separada (ex.: `chore/atualizar`), subida sozinha — somente as atualizações, sem outras mudanças. Usar conventional commits.
 
 ## Modelagem de dados
