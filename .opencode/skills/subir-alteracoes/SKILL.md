@@ -25,6 +25,12 @@ git diff   # revisar o que mudou em arquivos rastreados
 ## Passo 3 — Commits
 
 - Mensagens em português, estilo conventional commits: `feat: ...`, `chore: ...`.
+- **Corpo do commit com resumo**: além do título, listar em bullets os pontos mais importantes da mudança (o que mudou, decisões tomadas, impactos) — o resumo serve a quem for olhar o PR:
+  ```bash
+  git commit -m "feat: CRUD de personagens" -m "- ficha, criação e edição com formulário Tabler
+  - avatar anexado via Active Storage com validação de content type
+  - exclusão com confirm e flash de sucesso"
+  ```
 - **Uma natureza por branch** — nunca misturar: se houver dois `chore` e um `feat`, subir uma branch com os chores e outra com o feat. Docs seguem a mesma lógica (`docs: ...` em branch própria quando não pertencer à feature).
 - `git add` por grupos (nunca `git add .` às cegas): código, depois docs.
 - Lefthook roda o RuboCop em `pre-commit` (bloqueia o commit em caso de ofensa) e `post-commit`; só fazer push com ambos verdes.
