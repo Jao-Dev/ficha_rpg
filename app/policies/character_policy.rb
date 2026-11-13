@@ -11,6 +11,10 @@ class CharacterPolicy < ApplicationPolicy
     admin? || owner?
   end
 
+  def alternar?
+    admin? || owner?
+  end
+
   def destroy?
     admin? || owner?
   end

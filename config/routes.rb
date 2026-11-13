@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root "users#index"
 
   resources :users, only: [ :index ] do
-    resources :characters, only: [ :new, :create, :show, :edit, :update, :destroy ]
+    resources :characters, only: [ :new, :create, :show, :edit, :update, :destroy ] do
+      member { post :alternar }
+    end
   end
 
   resources :campaigns, only: [ :show, :create, :edit, :update, :destroy ]

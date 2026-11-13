@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_character, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_character, only: [ :show, :edit, :update, :destroy, :alternar ]
   after_action :verify_authorized
 
   def show
@@ -38,6 +38,11 @@ class CharactersController < ApplicationController
   def destroy
     @character.destroy
     redirect_to root_path, notice: "Personagem excluído com sucesso."
+  end
+
+  def alternar
+    session[:character_id] = @character.id
+    redirect_to root_path, notice: "Você agora está usando #{@character.name}."
   end
 
   private

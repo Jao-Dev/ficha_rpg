@@ -25,6 +25,15 @@
           - if user_signed_in?
             .ms-auto.d-flex.align-items-center
               = btn 'Nova campanha', campaigns_path, style: 'outline-primary', method: :post
+              %details.nav-item.dropdown.ms-2
+                %summary.nav-link.d-flex.flex-column
+                  %span= current_user.name
+                  - if (personagem = personagem_em_uso)
+                    %span= "(#{personagem.name})"
+                .dropdown-menu.dropdown-menu-end
+                  - current_user.characters.order(:name).each do |character|
+                    = button_to character.name, alternar_user_character_path(character.user, character),
+                      method: :post, class: 'dropdown-item', form: { class: 'd-inline' }
               = btn 'Log out', destroy_user_session_path, style: 'outline-secondary', method: :delete
       .page-wrapper
         .page-body
