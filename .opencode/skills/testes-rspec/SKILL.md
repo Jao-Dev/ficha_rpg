@@ -22,7 +22,8 @@ Stack de testes: RSpec + FactoryBot + Faker + Capybara (selenium) + Devise + Aud
   ```
 - Fluxos repetidos de navegação ficam em métodos `private` dentro do arquivo de feature (ex.: `logar_como_usuario`).
 - Factories centralizadas em `spec/factories.rb` (não criar `spec/factories/*.rb`). Usar Faker para dados genéricos e `trait` para estados alternativos (ex.: `trait :inativo`).
-- Arquivos dummy para upload ficam em `spec/resources/dummies/` (ex.: `dummy.png`, `dummy.heic`, `dummy.pdf`, `dummy.txt`) e arquivos sem extensão em `spec/resources/`.
+- Helpers de front-end: `card`, `alert` e `btn` do `UiHelper` para estrutura de página; `TablerFormBuilder` (padrão global) já aplica as classes Tabler — não repetir `form-label`/`form-control` nos formulários de `form_with`.
+- Arquivos dummy para upload ficam em `spec/resources/dummies/` (ex.: `dummy.png`, `dummy.heic`, `dummy.pdf`, `dummy.txt`) e arquivos sem extensão em `spec/resources/`. Imagens válidas para avatar/testes também podem vir de `spec/resources/` (ex.: `pingu_comunista.png`).
 - Anexar arquivos de Active Storage assim:
   ```ruby
   character.avatar.attach(

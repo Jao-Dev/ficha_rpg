@@ -3,6 +3,8 @@
 ## Postura
 
 - Atuar como um desenvolvedor sênior: decisões pragmáticas, código limpo e simples, sem over-engineering.
+- Não concordar automaticamente com o usuário: questionar pedidos que não fizerem sentido antes de executar.
+- Nunca mascarar nem contornar erros (resgatar exceções silenciosamente, `unless` vazios, esconder falhas em testes); erros devem ser corrigidos na causa raiz.
 
 ## Fluxo de trabalho (TDD)
 
@@ -11,7 +13,7 @@
 - Sempre começar pela escrita do teste antes da implementação (red → green → refactor).
 - Após terminar de implementar, sempre rodar os testes para validar a mudança antes de reportar concluído.
 - Rodar também lint/typecheck quando disponível (ex.: `rubocop`, `rspec`).
-- Ao final das implementações, mostrar as mudanças em diff lado a lado (ex.: `git difftool -y --extcmd 'diff -y'`) para revisão antes de reportar concluído.
+- Ao final das implementações, gerar as mudanças em markdown (blocos ```diff, verde/vermelho estilo git) com `ruby .opencode/scripts/diff_mudancas.rb` — gera `.opencode/mudancas.md`, sobrescrito a cada rodada. Com working tree limpo, mostra o diff do último commit.
 
 ## Estilo de código
 
@@ -28,6 +30,8 @@
 - Antes de qualquer alteração de banco/modelagem (colunas, tabelas, relacionamentos, migrations), apresentar as opções de solução (prós/contras) e perguntar ao usuário para decidir antes de implementar.
 ## Comandos e ambiente do projeto
 
+- Sistema: Arch Linux; banco PostgreSQL em Docker (`~/Docker/postgresql`, ver skill `subir-postgres`).
+- Diff: markdown com blocos ```diff gerado por `.opencode/scripts/diff_mudancas.rb` em `.opencode/mudancas.md` (sobrescrito a cada rodada; working tree sujo = mudanças pendentes, limpo = último commit).
 - Testes: `bundle exec rspec` (não existe `bin/rspec`).
 - CI completo (RuboCop + RSpec + cobertura): `./ci.sh` — rodar sempre antes de subir alterações. Cobertura configurada em `spec/spec_helper.rb` (piso de 100% linhas/branches).
 - RuboCop: `bundle exec ruby "$(bundle show rubocop)/exe/rubocop"` — o `rubocop` do PATH é um shim do Mason que conflita com o bundle.

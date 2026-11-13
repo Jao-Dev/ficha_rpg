@@ -1,0 +1,10 @@
+= card @campaign.master do
+  .card-body
+    %p= @campaign.ativo ? 'Ativa' : 'Inativa'
+    %p= @campaign.created_at.strftime('%d/%m/%Y')
+    - if @campaign.characters.any?
+      %ul
+        - @campaign.characters.each do |character|
+          %li= character.name
+    - else
+      %p.text-secondary Nenhum personagem nesta campanha.

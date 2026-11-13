@@ -1,0 +1,14 @@
+= form_with model: campaign do |f|
+  - if campaign.errors.any?
+    = alert('danger') do
+      %ul.mb-0
+        - campaign.errors.full_messages.each do |message|
+          %li= message
+
+  .mb-3
+    = f.label :master
+    = f.text_field :master
+
+  .d-flex
+    .ms-auto
+      = f.submit 'Criar campanha'

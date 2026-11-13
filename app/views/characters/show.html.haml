@@ -1,0 +1,9 @@
+= card @character.name,
+  actions: [ btn('Editar', edit_user_character_path(@character.user, @character), style: 'outline-primary'),
+             btn('Excluir', user_character_path(@character.user, @character),
+               style: 'outline-danger', method: :delete, confirm: 'Deseja excluir o personagem?') ] do
+  .card-body
+    - if @character.avatar.attached?
+      = image_tag @character.avatar, class: 'rounded'
+    %p= @character.race
+    %p= @character.campaign.master

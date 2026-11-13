@@ -1,1 +1,11 @@
-%h1 "Logado com sucesso!"
+= card 'Seus personagens', actions: btn('Novo personagem', new_user_character_path(current_user)) do
+  - if @characters.any?
+    .table-responsive
+      %table.table.card-table.table-vcenter
+        %tbody
+          - @characters.each do |character|
+            %tr
+              %td= link_to character.name, user_character_path(character.user, character)
+  - else
+    .card-body.text-secondary
+      Nenhum personagem ainda.

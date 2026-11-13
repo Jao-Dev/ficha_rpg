@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %title= content_for(:title) || 'Ficha Rpg'
+    %meta{ name: 'viewport', content: 'width=device-width,initial-scale=1' }
+    %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
+    %meta{ name: 'application-name', content: 'Ficha Rpg' }
+    %meta{ name: 'mobile-web-app-capable', content: 'yes' }
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = yield :head
+
+    %link{ rel: 'icon', href: '/icon.png', type: 'image/png' }
+    %link{ rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' }
+    %link{ rel: 'apple-touch-icon', href: '/icon.png' }
+
+    = stylesheet_link_tag :app, 'data-turbo-track': 'reload'
+    = javascript_importmap_tags
+  %body
+    .page
+      %header.navbar.navbar-expand-md.d-print-none
+        .container-xl
+          %h1.navbar-brand.mb-0.h-auto Ficha RPG
+          - if user_signed_in?
+            .ms-auto.d-flex.align-items-center
+              = btn 'Nova campanha', new_campaign_path, style: 'outline-primary'
+              = btn 'Log out', destroy_user_session_path, style: 'outline-secondary', method: :delete
+      .page-wrapper
+        .page-body
+          .container-xl
+            - flash.each do |type, message|
+              = alert(type == 'notice' ? 'success' : 'danger', message)
+            = yield

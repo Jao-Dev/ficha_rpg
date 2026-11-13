@@ -10,8 +10,9 @@ class Character < ApplicationRecord
 
   validates :name, :race, :ativo, presence: true
   validates :avatar,
-    content_type: { in:
-    ACCEPTED_CONTENT_TYPES,
-    spoofin_protection: true
+    content_type: {
+      in: ACCEPTED_CONTENT_TYPES,
+      spoofing_protection: true,
+      message: "deve ser uma imagem PNG ou JPEG"
     }
 end
