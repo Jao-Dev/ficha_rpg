@@ -8,7 +8,8 @@ OUT_PATH = '.opencode/mudancas.md'
 SKIP_PREFIXES = [ 'coverage/', '.opencode/' ].freeze
 
 def status_entries
-  `git status --porcelain`.strip.lines.map { |line| [line[0, 2].strip, line[3..].strip] }
+  `git status --porcelain`.lines.map(&:chomp).reject(&:empty?)
+    .map { |line| [line[0, 2].strip, line[3..]] }
     .reject { |_, path| path.end_with?('/') }
     .reject { |_, path| SKIP_PREFIXES.any? { |prefix| path.start_with?(prefix) } }
 end
