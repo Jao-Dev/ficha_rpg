@@ -1,6 +1,4 @@
-.card
-  .card-header
-    %h1.card-title= @campaign.master
+= card @campaign.master do
   .card-body
     %p= @campaign.ativo ? 'Ativa' : 'Inativa'
     %p= @campaign.created_at.strftime('%d/%m/%Y')

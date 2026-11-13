@@ -1,22 +1,23 @@
 = form_with model: [ character.user, character ] do |f|
   - if character.errors.any?
-    .alert.alert-danger
+    = alert('danger') do
       %ul.mb-0
         - character.errors.full_messages.each do |message|
           %li= message
+
   .mb-3
-    = f.label :name, class: 'form-label'
-    = f.text_field :name, class: 'form-control'
+    = f.label :name
+    = f.text_field :name
   .mb-3
-    = f.label :race, class: 'form-label'
-    = f.text_field :race, class: 'form-control'
+    = f.label :race
+    = f.text_field :race
   .mb-3
-    = f.label :campaign_id, class: 'form-label'
-    = f.collection_select :campaign_id, Campaign.all, :id, :master,
-      { prompt: 'Selecione a campanha' }, class: 'form-select'
+    = f.label :campaign_id
+    = f.collection_select :campaign_id, Campaign.all, :id, :master, { prompt: 'Selecione a campanha' }
   .mb-3
-    = f.label :avatar, class: 'form-label'
-    = f.file_field :avatar, class: 'form-control'
+    = f.label :avatar
+    = f.file_field :avatar
+
   .d-flex
     .ms-auto
-      = f.submit character.new_record? ? 'Criar personagem' : 'Atualizar personagem', class: 'btn btn-primary'
+      = f.submit character.new_record? ? 'Criar personagem' : 'Atualizar personagem'

@@ -24,12 +24,11 @@
           %h1.navbar-brand.mb-0.h-auto Ficha RPG
           - if user_signed_in?
             .ms-auto.d-flex.align-items-center
-              = link_to 'Nova campanha', new_campaign_path, class: 'btn btn-outline-primary btn-sm'
-              = button_to 'Log out', destroy_user_session_path, method: :delete,
-                class: 'btn btn-outline-secondary btn-sm ms-2', form: { class: 'd-inline' }
+              = btn 'Nova campanha', new_campaign_path, style: 'outline-primary'
+              = btn 'Log out', destroy_user_session_path, style: 'outline-secondary', method: :delete
       .page-wrapper
         .page-body
           .container-xl
             - flash.each do |type, message|
-              .alert{ class: type == 'notice' ? 'alert-success' : 'alert-danger', role: 'alert' }= message
+              = alert(type == 'notice' ? 'success' : 'danger', message)
             = yield

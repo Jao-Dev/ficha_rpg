@@ -1,13 +1,7 @@
-.card
-  .card-header.d-flex.align-items-center
-    %h1.card-title= @character.name
-    .ms-auto.d-flex
-      = link_to 'Editar', edit_user_character_path(@character.user, @character), class: 'btn btn-outline-primary btn-sm'
-      = button_to 'Excluir', user_character_path(@character.user, @character),
-        method: :delete,
-        class: 'btn btn-outline-danger btn-sm ms-2',
-        form: { class: 'd-inline' },
-        data: { turbo_confirm: 'Deseja excluir o personagem?' }
+= card @character.name,
+  actions: [ btn('Editar', edit_user_character_path(@character.user, @character), style: 'outline-primary'),
+             btn('Excluir', user_character_path(@character.user, @character),
+               style: 'outline-danger', method: :delete, confirm: 'Deseja excluir o personagem?') ] do
   .card-body
     - if @character.avatar.attached?
       = image_tag @character.avatar, class: 'rounded'

@@ -1,7 +1,4 @@
-.card
-  .card-header.d-flex.align-items-center
-    %h1.card-title Seus personagens
-    .ms-auto= link_to 'Novo personagem', new_user_character_path(current_user), class: 'btn btn-primary btn-sm'
+= card 'Seus personagens', actions: btn('Novo personagem', new_user_character_path(current_user)) do
   - if @characters.any?
     .table-responsive
       %table.table.card-table.table-vcenter
