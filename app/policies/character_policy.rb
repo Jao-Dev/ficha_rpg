@@ -26,6 +26,6 @@ class CharacterPolicy < ApplicationPolicy
   end
 
   def campaign_master?
-    record.campaign.master == user
+    record.campaign && record.campaign.master == user
   end
 end

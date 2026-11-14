@@ -6,4 +6,5 @@
     - if @character.avatar.attached?
       = image_tag @character.avatar, class: 'rounded'
     %p= @character.race
-    %p= @character.campaign.master
+    - if @character.campaign
+      %p= @character.campaign.master

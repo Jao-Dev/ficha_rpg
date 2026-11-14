@@ -23,6 +23,16 @@ feature 'gerenciar personagens' do
       expect(page).to have_content campaign.master
       expect(page).to have_css("img[src*='dummy.png']")
     end
+
+    scenario 'sem campanha não exibe mestre' do
+      personagem = create(:character, user: user, race: 'Anão')
+
+      logar_como user
+      visit user_character_path(user, personagem)
+
+      expect(page).to have_content personagem.name
+      expect(page).to have_content 'Anão'
+    end
   end
 
   describe 'criar personagem' do

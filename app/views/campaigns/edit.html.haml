@@ -1,3 +1,46 @@
 .card
   .card-body
     = render 'form', campaign: @campaign
+
+= card 'Personagens' do
+  .card-body
+    - ativos = @campaign.campaign_characters.ativo.includes(character: :user)
+    - if ativos.any?
+      %ul
+        - ativos.each do |vinculo|
+          %li.d-flex.align-items-center
+            = vinculo.character.name
+            .ms-auto
+              = btn 'Remover', campaign_campaign_character_path(@campaign, vinculo), style: 'outline-danger', method: :delete
+    - else
+      .text-secondary
+        Nenhum personagem ativo nesta campanha.
+
+    - pendentes = @campaign.campaign_characters.pendente.includes(character: :user)
+    - if pendentes.any?
+      %p Aguardando confirmação do dono:
+      %ul
+        - pendentes.each do |vinculo|
+          %li.d-flex.align-items-center
+            = vinculo.character.name
+            %span.badge.ms-2 Pendente
+            .ms-auto
+              = btn 'Remover', campaign_campaign_character_path(@campaign, vinculo), style: 'outline-danger', method: :delete
+
+  .card-body
+    = form_with url: edit_campaign_path(@campaign), method: :get do |f|
+      .mb-3
+        = f.label :q, 'Personagem'
+        = f.text_field :q
+      = f.submit 'Buscar'
+
+  - if @resultados&.any?
+    .card-body
+      - @resultados.group_by(&:user).each do |dono, personagens|
+        %p= dono.name
+        %ul
+          - personagens.each do |personagem|
+            %li.d-flex.align-items-center
+              = personagem.name
+              .ms-auto
+                = btn 'Adicionar', campaign_campaign_characters_path(@campaign, character_id: personagem.id), style: 'outline-primary', method: :post

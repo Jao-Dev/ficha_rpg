@@ -11,7 +11,5 @@ class User < ApplicationRecord
 
   enum :role, { jogador: 0, mestre: 1, admin: 2 }
 
-  has_many :characters, dependent: :destroy
-
   def to_s = name
 end

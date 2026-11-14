@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :campaigns, only: [ :show, :create, :edit, :update, :destroy ]
+  resources :campaigns, only: [ :index, :show, :create, :edit, :update, :destroy ] do
+    resources :campaign_characters, only: [ :create, :update, :destroy ]
+  end
 end
