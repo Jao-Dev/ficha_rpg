@@ -48,7 +48,6 @@ gem "pundit"
 # support
 gem "anyway_config"
 gem "haml-rails"
-gem "simple_form"
 
 # infrastructure support'
 gem "strong_migrations"
