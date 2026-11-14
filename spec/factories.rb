@@ -38,6 +38,11 @@ FactoryBot.define do
     end
   end
 
+  factory :aviso do
+    user
+    content { 'Seu personagem foi inserido em uma campanha.' }
+  end
+
   factory :campaign do
     association :master, factory: :user
     ativo { true }

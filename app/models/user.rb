@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :characters, dependent: :destroy
 
+  has_many :avisos, dependent: :destroy
+
   validates :name, :email, presence: true
 
   enum :role, { jogador: 0, mestre: 1, admin: 2 }
