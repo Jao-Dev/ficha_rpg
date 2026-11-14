@@ -1,0 +1,8 @@
+= card 'Avisos' do
+  - if @avisos.any?
+    %ul
+      - @avisos.each do |aviso|
+        %li= aviso.content
+  - else
+    .card-body.text-secondary
+      Nenhum aviso ainda.
