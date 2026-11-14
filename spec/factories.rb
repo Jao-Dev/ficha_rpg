@@ -25,12 +25,16 @@ FactoryBot.define do
   factory :character do
     name { 'Yudmit Longfeet' }
     race { 'Dwarf' }
-    ativo { true }
     user
-    campaign
+  end
 
-    trait :inativo do
-      ativo { false }
+  factory :campaign_character do
+    campaign
+    character
+    status { :pendente }
+
+    trait :ativo do
+      status { :ativo }
     end
   end
 

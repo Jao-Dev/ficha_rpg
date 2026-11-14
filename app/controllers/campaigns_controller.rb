@@ -6,15 +6,30 @@ class CampaignsController < ApplicationController
   def show
   end
 
+  def index
+    campanhas_de_personagens = CampaignCharacter.ativo
+      .where(character_id: current_user.character_ids).select(:campaign_id)
+
+    @campanhas = Campaign.where(master: current_user)
+      .or(Campaign.where(id: campanhas_de_personagens)).includes(:master)
+    @pendentes = CampaignCharacter.pendente
+      .where(character_id: current_user.character_ids).includes(:character, campaign: :master)
+    authorize Campaign.new
+  end
+
+  def edit
+    if params[:q].present?
+      @resultados = Character.where(campaign_id: nil)
+        .where("name ILIKE ?", "%#{params[:q]}%").includes(:user).order(:name)
+    end
+  end
+
   def create
     @campaign = Campaign.new(master: current_user)
     authorize @campaign
 
     @campaign.save!
     redirect_to campaign_path(@campaign), notice: "Campanha criada com sucesso."
-  end
-
-  def edit
   end
 
   def update

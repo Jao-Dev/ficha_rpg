@@ -1,0 +1,19 @@
+- if @pendentes.any?
+  = card 'Personagens aguardando confirmação' do
+    %ul
+      - @pendentes.each do |vinculo|
+        %li.d-flex.align-items-center
+          = vinculo.character.name
+          %span.badge.ms-2 Pendente
+          .ms-auto.d-flex.align-items-center
+            = btn 'Confirmar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-primary', method: :patch
+            = btn 'Recusar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-danger', method: :delete
+
+= card 'Minhas campanhas' do
+  - if @campanhas.any?
+    %ul
+      - @campanhas.each do |campaign|
+        %li= link_to campaign.master.name, campaign_path(campaign)
+  - else
+    .card-body.text-secondary
+      Nenhuma campanha ainda.

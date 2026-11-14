@@ -7,6 +7,7 @@ feature 'gerenciar campanhas' do
     let(:master) { create(:user, name: 'Mestre boladão') }
     let(:campaign) { create(:campaign, master: master) }
     let!(:character) { create(:character, name: 'Yudmit Longfeet', user: user, campaign: campaign) }
+    let!(:vinculo) { character.campaign_characters.sole }
 
     scenario 'exibe mestre, status, data e personagens' do
       logar_como user
