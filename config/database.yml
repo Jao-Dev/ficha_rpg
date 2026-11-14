@@ -88,8 +88,9 @@ production:
   primary: &primary_production
     <<: *default
     database: ficha_rpg_production
-    username: ficha_rpg
-    password: <%= ENV["FICHA_RPG_DATABASE_PASSWORD"] %>
+    host: <%= ENV["DB_HOST"] || "db" %>
+    username: <%= ENV["DB_USERNAME"] || "ficha" %>
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: ficha_rpg_production_cache
