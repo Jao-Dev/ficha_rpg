@@ -38,6 +38,9 @@ Ficha de RPG em Ruby/Rails:
 6. ~~**Alternância de personagens** (perfis)~~ (concluído em 13/11/2026): seletor no header com nome do usuário e, entre parênteses, o personagem em uso; seleção guardada em `session[:character_id]` (nada no banco).
 7. ~~**Convites/vínculos de personagens na campanha**~~ (concluído em 14/11/2026): tabela `campaign_characters` (campaign, character, status pendente→ativo, audited); mestre adiciona personagens na edição (busca por nome, agrupados por usuário) e o vínculo fica pendente até o dono confirmar/recusar em "Minhas campanhas"; jogador ainda se inscreve direto no form (vínculo ativo imediato); mestre remove quando quiser; coluna `characters.ativo` removida (a informação fica só na campanha).
 8. ~~Exclusão de campanha com aviso~~ (desistido em 14/11/2026 — sem soft delete, sem aviso, sem job).
+9. **Mochila do personagem** (pedido em 14/11/2026): adicionar/remover itens na ficha; cada item é só um campo de texto (nome) + quantidade (pode ser zero).
+10. **Melhorar a experiência do mestre na campanha** (pedido em 14/11/2026): ainda em aberto — ideias: local de texto para anotar pontos importantes, salvar etapas/progresso da sessão, e outras ferramentas de apoio ao mestre; precisa ser pensado junto com o usuário.
+11. ~~**Rodar em produção com Docker Compose**~~ (concluído em 14/11/2026): `compose.yml` com 2 containers (app + Postgres 18); `database.yml` de produção lê host/usuário/senha de variáveis de ambiente; variáveis em `.env` (gitignored) documentadas em `.env.example`; entrypoint roda `db:prepare` no boot; seed bloqueado fora de desenvolvimento.
 
 ## Pendências
 
