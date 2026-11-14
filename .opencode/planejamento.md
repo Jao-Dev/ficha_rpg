@@ -37,12 +37,12 @@ Ficha de RPG em Ruby/Rails:
 5. ~~Devise (confirmação e recuperação de senha)~~ (concluído em 13/11/2026; pendência: SMTP de produção e telas do Devise no padrão Tabler).
 6. ~~**Alternância de personagens** (perfis)~~ (concluído em 13/11/2026): seletor no header com nome do usuário e, entre parênteses, o personagem em uso; seleção guardada em `session[:character_id]` (nada no banco).
 7. ~~**Convites/vínculos de personagens na campanha**~~ (concluído em 14/11/2026): tabela `campaign_characters` (campaign, character, status pendente→ativo, audited); mestre adiciona personagens na edição (busca por nome, agrupados por usuário) e o vínculo fica pendente até o dono confirmar/recusar em "Minhas campanhas"; jogador ainda se inscreve direto no form (vínculo ativo imediato); mestre remove quando quiser; coluna `characters.ativo` removida (a informação fica só na campanha).
-8. **Exclusão de campanha com aviso**: ao excluir, usuários da campanha recebem aviso de que ela será deletada em 2 dias; soft delete da campanha (flag) + job que efetiva a deleção após o período (pedido em 13/11/2026, junto com os convites).
+8. ~~Exclusão de campanha com aviso~~ (desistido em 14/11/2026 — sem soft delete, sem aviso, sem job).
 
 ## Pendências
 
+- ~~Telas do Devise no padrão Tabler~~ (concluído em 14/11/2026: views convertidas para cards Tabler com `TablerFormBuilder`; gem simple_form removido).
 - SMTP de produção.
-- Telas do Devise no padrão Tabler.
 - Convite por e-mail para usuário sem conta (link de cadastro no convite).
 
 ## Convenções do projeto
