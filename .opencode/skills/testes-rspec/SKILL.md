@@ -21,6 +21,12 @@ Stack de testes: RSpec + FactoryBot + Faker + Capybara (selenium) + Devise + Aud
   - `let!` para dados que precisam existir **antes** da ação do cenário (ex.: personagens que devem aparecer na página) — `let` é lazy e criaria depois da navegação;
   - variáveis de usuário com role específica levam o nome do papel (ex.: `admin`, `master`), não `user`;
   - nomes explícitos nos registros que podem colidir (a factory `:character` usa nome fixo).
+- `let` que servem a vários `describe` sobem para o bloco principal; cada `describe` só sobrescreve o que muda (inclusive `subject` quando o papel do usuário muda):
+  ```ruby
+  describe MembershipPolicy do
+    subject(:policy) { described_class.new(user, membership) }
+    let(:user) { create(:user) }
+    let(:membership) { create(:membership) }
 - Fluxos repetidos de navegação ficam no `spec/support/feature_helpers.rb` (ex.: `logar_como`) ou, se muito específicos, em métodos `private` dentro do arquivo.
 - Validações de presença em uma linha com o matcher do gem `valid_attribute`:
   ```ruby
