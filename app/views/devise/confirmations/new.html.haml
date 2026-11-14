@@ -1,17 +1,17 @@
-%h2 Reenviar instruções de confirmação
+= card 'Reenviar instruções de confirmação' do
+  .card-body
+    = form_with model: resource, as: resource_name, url: confirmation_path(resource_name) do |f|
+      - if resource.errors.any?
+        = alert('danger') do
+          %ul.mb-0
+            - resource.errors.full_messages.each do |message|
+              %li= message
 
-= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  = f.full_error :confirmation_token
+      .mb-3
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: 'email',
+          value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+      = f.submit 'Reenviar instruções de confirmação'
 
-  .form-inputs
-    = f.input :email,
-              required: true,
-              autofocus: true,
-              value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
-              input_html: { autocomplete: 'email' }
-
-  .form-actions
-    = f.button :submit, 'Reenviar instruções de confirmação'
-
-= render 'devise/shared/links'
+.text-center
+  = render 'devise/shared/links'

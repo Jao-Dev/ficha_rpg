@@ -1,24 +1,25 @@
-%h2 Mudar sua senha
+= card 'Mudar sua senha' do
+  .card-body
+    = form_with model: resource, as: resource_name, url: password_path(resource_name), html: { method: :put } do |f|
+      = f.hidden_field :reset_password_token
 
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+      - if resource.errors.any?
+        = alert('danger') do
+          %ul.mb-0
+            - resource.errors.full_messages.each do |message|
+              %li= message
 
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
+      .mb-3
+        = f.label :password, 'Nova senha'
+        - if @minimum_password_length
+          .form-hint
+            = @minimum_password_length
+            caracteres no mínimo
+        = f.password_field :password, autofocus: true, autocomplete: 'new-password'
+      .mb-3
+        = f.label :password_confirmation, 'Confirmar nova senha'
+        = f.password_field :password_confirmation, autocomplete: 'new-password'
+      = f.submit 'Mudar minha senha'
 
-  .form-inputs
-    = f.input :password,
-              label: 'Nova senha',
-              required: true,
-              autofocus: true,
-              hint: ("#{@minimum_password_length} caracteres no mínimo" if @minimum_password_length),
-              input_html: { autocomplete: 'new-password' }
-    = f.input :password_confirmation,
-              label: 'Confirmar nova senha',
-              required: true,
-              input_html: { autocomplete: 'new-password' }
-
-  .form-actions
-    = f.button :submit, 'Mudar minha senha'
-
-= render 'devise/shared/links'
+.text-center
+  = render 'devise/shared/links'
