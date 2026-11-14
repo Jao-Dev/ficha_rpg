@@ -42,8 +42,9 @@ Ficha de RPG em Ruby/Rails:
 ## Pendências
 
 - ~~Telas do Devise no padrão Tabler~~ (concluído em 14/11/2026: views convertidas para cards Tabler com `TablerFormBuilder`; gem simple_form removido).
-- SMTP de produção.
-- Convite por e-mail para usuário sem conta (link de cadastro no convite).
+- ~~SMTP de produção~~ (desistido em 14/11/2026).
+- ~~Convite por e-mail para usuário sem conta~~ (desistido em 14/11/2026).
+- **Tela de avisos** (pedido em 14/11/2026): tabela `avisos` (user, content, read_at, audited, scopes `:lidos`/`:nao_lidos`); link "Avisos (n)" no header quando há não lidos; abrir a tela marca tudo como lido. Avisos criados quando: mestre insere personagem (→ dono), dono confirma/recusa (→ mestre), mestre remove personagem (→ dono).
 
 ## Convenções do projeto
 
