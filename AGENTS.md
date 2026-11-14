@@ -50,4 +50,5 @@
 ## Aprendizado contínuo
 
 - Atualizar este arquivo sempre que aprender algo relevante sobre como o usuário escreve ou pede código (preferências, padrões, correções de rota).
+- Quando uma instrução/fluxo se repetir bastante, criar skill em `.opencode/skills/<nome>/SKILL.md` para agilizar (autorização do usuário em 14/11/2026) — ex.: fluxo de feature TDD repetido pode virar skill própria.
 - Planejamento do projeto: manter e consultar `.opencode/planejamento.md` (atualizá-lo conforme tarefas forem concluídas).
