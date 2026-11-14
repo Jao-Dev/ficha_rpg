@@ -1,6 +1,12 @@
 # Seeds do ambiente de desenvolvimento: bin/rails db:seed
 # Quantidade de usuários Faker configurável: QUANTIDADE_USUARIOS=10 bin/rails db:seed
 # O usuário desenv é fixo; os demais são gerados com Faker a cada execução.
+# Bloqueado fora de desenvolvimento: em produção o seed não deve criar dados.
+
+unless Rails.env.development?
+  puts "Seed disponível apenas em desenvolvimento."
+  return
+end
 
 senha = "password"
 agora = Time.current

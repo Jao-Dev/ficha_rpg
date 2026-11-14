@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    ports: [ "80:80" ]
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: ficha
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ficha_rpg_production
+    volumes:
+      - dados:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ficha -d ficha_rpg_production" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  dados:
