@@ -1,34 +1,38 @@
-%h2 Editar #{resource_name.to_s.humanize}
+= card "Editar #{resource_name.to_s.humanize}" do
+  .card-body
+    = form_with model: resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f|
+      - if resource.errors.any?
+        = alert('danger') do
+          %ul.mb-0
+            - resource.errors.full_messages.each do |message|
+              %li= message
 
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+      .mb-3
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .form-hint
+          Aguardando confirmação de: #{resource.unconfirmed_email}
+      .mb-3
+        = f.label :password
+        .form-hint deixe em branco se não quiser mudar
+        = f.password_field :password, autocomplete: 'new-password'
+      .mb-3
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: 'new-password'
+      .mb-3
+        = f.label :current_password
+        .form-hint precisamos da sua senha atual para confirmar as mudanças
+        = f.password_field :current_password, autocomplete: 'current-password'
+      = f.submit 'Atualizar'
 
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
+.card
+  .card-body
+    %h2 Cancelar minha conta
+    %p
+      Insatisfeito?
+      = button_to 'Cancelar minha conta', registration_path(resource_name),
+        data: { confirm: 'Tem certeza?', turbo_confirm: 'Tem certeza?' }, method: :delete
 
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p Aguardando confirmação de: #{resource.unconfirmed_email}
-
-    = f.input :password,
-              hint: 'deixe em branco se não quiser mudar',
-              required: false,
-              input_html: { autocomplete: 'new-password' }
-    = f.input :password_confirmation,
-              required: false,
-              input_html: { autocomplete: 'new-password' }
-    = f.input :current_password,
-              hint: 'precisamos da sua senha atual para confirmar as mudanças',
-              required: true,
-              input_html: { autocomplete: 'current-password' }
-
-  .form-actions
-    = f.button :submit, 'Atualizar'
-
-%h3 Cancelar minha conta
-
-%div
-  Insatisfeito?
-  = button_to 'Cancelar minha conta', registration_path(resource_name),
-    data: { confirm: 'Tem certeza?', turbo_confirm: 'Tem certeza?' }, method: :delete
-
-= link_to 'Voltar', :back
+.text-center
+  = link_to 'Voltar', :back
