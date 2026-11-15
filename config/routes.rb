@@ -5,7 +5,18 @@ Rails.application.routes.draw do
 
   resources :users, only: [ :index ] do
     resources :characters, only: [ :new, :create, :show, :edit, :update, :destroy ] do
-      member { post :alternar }
+      member do
+        post :alternar
+        post :adicionar_item
+        patch :atualizar_item
+        delete :remover_item
+        post :adicionar_arma
+        patch :atualizar_arma
+        delete :remover_arma
+        post :adicionar_efeito
+        patch :atualizar_efeito
+        delete :remover_efeito
+      end
     end
   end
 

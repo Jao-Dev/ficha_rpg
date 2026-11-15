@@ -1,0 +1,27 @@
+= card 'Efeitos' do
+  .card-body
+    - if policy(character).adicionar_efeito?
+      = form_with url: adicionar_efeito_user_character_path(character.user, character) do |f|
+        .mb-3
+          = f.label :efeito, 'Efeito', for: 'efeito'
+          = f.text_field :efeito
+        = f.submit 'Adicionar efeito'
+    - if character.efeitos.any?
+      - character.efeitos.each_with_index do |efeito, indice|
+        .d-flex.align-items-center.mb-2
+          %span= efeito
+          - if policy(character).remover_efeito?
+            .ms-auto
+              = btn('Remover', remover_efeito_user_character_path(character.user, character, indice: indice),
+                style: 'outline-danger', method: :delete)
+          - if policy(character).atualizar_efeito?
+            %details
+              %summary Editar
+              = form_with url: atualizar_efeito_user_character_path(character.user, character), method: :patch do |f|
+                = f.hidden_field :indice, value: indice
+                .mb-3
+                  = f.label :efeito, 'Efeito', for: "efeito_#{indice}"
+                  = f.text_field :efeito, value: efeito, id: "efeito_#{indice}"
+                = f.submit 'Salvar'
+    - else
+      %p Nenhum efeito.

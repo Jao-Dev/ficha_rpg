@@ -15,6 +15,42 @@ class CharacterPolicy < ApplicationPolicy
     admin? || owner?
   end
 
+  def adicionar_item?
+    admin? || owner?
+  end
+
+  def atualizar_item?
+    admin? || owner?
+  end
+
+  def remover_item?
+    admin? || owner?
+  end
+
+  def adicionar_arma?
+    admin? || owner?
+  end
+
+  def atualizar_arma?
+    admin? || owner?
+  end
+
+  def remover_arma?
+    admin? || owner?
+  end
+
+  def adicionar_efeito?
+    admin? || owner?
+  end
+
+  def atualizar_efeito?
+    admin? || owner?
+  end
+
+  def remover_efeito?
+    admin? || owner?
+  end
+
   def destroy?
     admin? || owner?
   end

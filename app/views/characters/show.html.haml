@@ -8,3 +8,17 @@
     %p= @character.race
     - if @character.campaign
       %p= @character.campaign.master
+
+- if @character.historia.present?
+  = card 'História' do
+    .card-body
+      = simple_format @character.historia
+
+- if policy(@character).update? && @character.anotacoes.present?
+  = card 'Anotações' do
+    .card-body
+      = simple_format @character.anotacoes
+
+= render 'mochila', character: @character
+= render 'armas', character: @character
+= render 'efeitos', character: @character
