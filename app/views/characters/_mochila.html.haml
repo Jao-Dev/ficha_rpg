@@ -1,0 +1,33 @@
+= card 'Mochila' do
+  .card-body
+    - if policy(character).adicionar_item?
+      = form_with url: adicionar_item_user_character_path(character.user, character) do |f|
+        .mb-3
+          = f.label :item, 'Item', for: 'item'
+          = f.text_field :item
+        .mb-3
+          = f.label :quantidade, 'Quantidade', for: 'quantidade'
+          = f.number_field :quantidade
+        = f.submit 'Adicionar item'
+    - if character.mochila.any?
+      - character.mochila.each_with_index do |item, indice|
+        .d-flex.align-items-center.mb-2
+          %span #{item['nome']} (#{item['quantidade']})
+          - if policy(character).remover_item?
+            .ms-auto
+              = btn('Remover', remover_item_user_character_path(character.user, character, indice: indice),
+                style: 'outline-danger', method: :delete)
+          - if policy(character).atualizar_item?
+            %details
+              %summary Editar
+              = form_with url: atualizar_item_user_character_path(character.user, character), method: :patch do |f|
+                = f.hidden_field :indice, value: indice
+                .mb-3
+                  = f.label :item, 'Item', for: "item_#{indice}"
+                  = f.text_field :item, value: item['nome'], id: "item_#{indice}"
+                .mb-3
+                  = f.label :quantidade, 'Quantidade', for: "quantidade_#{indice}"
+                  = f.number_field :quantidade, value: item['quantidade'], id: "quantidade_#{indice}"
+                = f.submit 'Salvar'
+    - else
+      %p Mochila vazia.

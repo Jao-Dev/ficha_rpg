@@ -17,6 +17,12 @@
   .mb-3
     = f.label :avatar
     = f.file_field :avatar
+  .mb-3
+    = f.label :anotacoes, 'Anotações'
+    = f.text_area :anotacoes
+  .mb-3
+    = f.label :historia, 'História'
+    = f.text_area :historia
 
   .d-flex
     .ms-auto

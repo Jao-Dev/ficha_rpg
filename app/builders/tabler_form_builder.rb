@@ -1,5 +1,5 @@
 class TablerFormBuilder < ActionView::Helpers::FormBuilder
-  FIELD_HELPERS = %i[text_field email_field password_field file_field].freeze
+  FIELD_HELPERS = %i[text_field email_field password_field file_field number_field text_area].freeze
 
   FIELD_HELPERS.each do |helper|
     define_method(helper) do |attribute, options = {}|

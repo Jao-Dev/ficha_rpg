@@ -1,0 +1,33 @@
+= card 'Armas' do
+  .card-body
+    - if policy(character).adicionar_arma?
+      = form_with url: adicionar_arma_user_character_path(character.user, character) do |f|
+        .mb-3
+          = f.label :arma, 'Arma', for: 'arma'
+          = f.text_field :arma
+        .mb-3
+          = f.label :dano, 'Dano', for: 'dano'
+          = f.text_field :dano
+        = f.submit 'Adicionar arma'
+    - if character.armas.any?
+      - character.armas.each_with_index do |arma, indice|
+        .d-flex.align-items-center.mb-2
+          %span #{arma['nome']} (#{arma['dano']})
+          - if policy(character).remover_arma?
+            .ms-auto
+              = btn('Remover', remover_arma_user_character_path(character.user, character, indice: indice),
+                style: 'outline-danger', method: :delete)
+          - if policy(character).atualizar_arma?
+            %details
+              %summary Editar
+              = form_with url: atualizar_arma_user_character_path(character.user, character), method: :patch do |f|
+                = f.hidden_field :indice, value: indice
+                .mb-3
+                  = f.label :arma, 'Arma', for: "arma_#{indice}"
+                  = f.text_field :arma, value: arma['nome'], id: "arma_#{indice}"
+                .mb-3
+                  = f.label :dano, 'Dano', for: "dano_#{indice}"
+                  = f.text_field :dano, value: arma['dano'], id: "dano_#{indice}"
+                = f.submit 'Salvar'
+    - else
+      %p Nenhuma arma.

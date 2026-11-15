@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_14_020000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_15_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -98,6 +98,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_020000) do
     t.string "race", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.jsonb "extras", default: {}, null: false
+    t.text "anotacoes"
+    t.text "historia"
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
