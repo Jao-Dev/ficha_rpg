@@ -41,6 +41,7 @@ Ficha de RPG em Ruby/Rails:
 9. ~~**Mochila do personagem**~~ (concluído em 15/11/2026): coluna jsonb `extras` em `characters` com as listas `mochila` (nome + quantidade Int ≥ 0, zero ok), `armas` (nome + dano em texto livre) e `efeitos` (strings simples); chaves desconhecidas rejeitadas. Colunas `anotacoes` e `historia` (text). 9 ações member (adicionar/atualizar/remover × 3 listas) com edição inline por índice; dono/admin editam, mestre da campanha só visualiza. Anotações privadas do dono/admin; história visível para quem vê a ficha. Cards Mochila/Armas/Efeitos/História/Anotações na ficha + text areas no formulário.
 10. **Melhorar a experiência do mestre na campanha** (pedido em 14/11/2026): ainda em aberto — ideias: local de texto para anotar pontos importantes, salvar etapas/progresso da sessão, e outras ferramentas de apoio ao mestre; precisa ser pensado junto com o usuário.
 11. ~~**Rodar em produção com Docker Compose**~~ (concluído em 14/11/2026): `compose.yml` com 2 containers (app + Postgres 18); `database.yml` de produção lê host/usuário/senha de variáveis de ambiente; variáveis em `.env` (gitignored) documentadas em `.env.example`; entrypoint roda `db:prepare` no boot; seed bloqueado fora de desenvolvimento.
+12. **Sistema de rolagem de dados** (pedido em 15/11/2026): rolar dados a partir da ficha (ex.: notação `2d6+3`); detalhes de modelagem e interface a definir junto com o usuário (onde aparece o resultado, histórico de rolagens, se mestre vê as rolagens dos jogadores).
 
 ## Pendências
 
