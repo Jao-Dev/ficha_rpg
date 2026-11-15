@@ -9,7 +9,7 @@
             = btn 'Confirmar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-primary', method: :patch
             = btn 'Recusar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-danger', method: :delete
 
-= card 'Minhas campanhas' do
+= card current_user.admin? ? 'Todas as campanhas' : 'Minhas campanhas' do
   - if @campanhas.any?
     %ul
       - @campanhas.each do |campaign|

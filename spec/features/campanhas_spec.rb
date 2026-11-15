@@ -28,6 +28,21 @@ feature 'minhas campanhas' do
     end
   end
 
+  describe 'admin vê todas as campanhas' do
+    let(:admin) { create(:user, :admin) }
+    let!(:minha) { create(:campaign, master: admin) }
+    let!(:outra) { create(:campaign) }
+
+    scenario 'lista todas as campanhas do sistema' do
+      logar_como admin
+      visit campaigns_path
+
+      expect(page).to have_content 'Todas as campanhas'
+      expect(page).to have_content minha.master.name
+      expect(page).to have_content outra.master.name
+    end
+  end
+
   describe 'personagens aguardando confirmação' do
     let(:user) { create(:user) }
     let(:campaign) { create(:campaign) }
