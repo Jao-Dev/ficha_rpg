@@ -19,4 +19,12 @@ feature 'página inicial' do
     logar_como user
     expect(page).not_to have_content outro_personagem.name
   end
+
+  scenario 'título do header leva à página inicial' do
+    logar_como user
+    visit campaigns_path
+    click_link 'Ficha RPG'
+
+    expect(page).to have_current_path root_path
+  end
 end

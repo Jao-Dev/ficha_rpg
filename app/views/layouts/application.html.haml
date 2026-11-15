@@ -21,7 +21,8 @@
     .page
       %header.navbar.navbar-expand-md.d-print-none
         .container-xl
-          %h1.navbar-brand.mb-0.h-auto Ficha RPG
+          %h1.navbar-brand.mb-0.h-auto
+            = link_to 'Ficha RPG', root_path
           - if user_signed_in?
             .ms-auto.d-flex.align-items-center
               = btn 'Campanhas', campaigns_path, style: 'outline-primary'
