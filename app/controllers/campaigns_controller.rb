@@ -10,8 +10,12 @@ class CampaignsController < ApplicationController
     campanhas_de_personagens = CampaignCharacter.ativo
       .where(character_id: current_user.character_ids).select(:campaign_id)
 
-    @campanhas = Campaign.where(master: current_user)
-      .or(Campaign.where(id: campanhas_de_personagens)).includes(:master)
+    @campanhas = if current_user.admin?
+      Campaign.all.includes(:master)
+    else
+      Campaign.where(master: current_user)
+        .or(Campaign.where(id: campanhas_de_personagens)).includes(:master)
+    end
     @pendentes = CampaignCharacter.pendente
       .where(character_id: current_user.character_ids).includes(:character, campaign: :master)
     authorize Campaign.new
