@@ -1,3 +1,5 @@
+- caminho_remover = ->(vinculo) { campaign_campaign_character_path(@campaign, vinculo) }
+
 .card
   .card-body
     = render 'form', campaign: @campaign
@@ -11,7 +13,7 @@
           %li.d-flex.align-items-center
             = vinculo.character.name
             .ms-auto
-              = btn 'Remover', campaign_campaign_character_path(@campaign, vinculo), style: 'outline-danger', method: :delete
+              = btn 'Remover', caminho_remover.call(vinculo), style: 'outline-danger', method: :delete
     - else
       .text-secondary
         Nenhum personagem ativo nesta campanha.
@@ -25,7 +27,7 @@
             = vinculo.character.name
             %span.badge.ms-2 Pendente
             .ms-auto
-              = btn 'Remover', campaign_campaign_character_path(@campaign, vinculo), style: 'outline-danger', method: :delete
+              = btn 'Remover', caminho_remover.call(vinculo), style: 'outline-danger', method: :delete
 
   .card-body
     = form_with url: edit_campaign_path(@campaign), method: :get do |f|
@@ -37,10 +39,13 @@
   - if @resultados&.any?
     .card-body
       - @resultados.group_by(&:user).each do |dono, personagens|
-        %p= dono.name
+        %p.nome-grupo= dono.name
         %ul
           - personagens.each do |personagem|
             %li.d-flex.align-items-center
+              - if personagem.avatar.attached?
+                = image_tag personagem.avatar, class: 'rounded me-2', width: 32
               = personagem.name
               .ms-auto
-                = btn 'Adicionar', campaign_campaign_characters_path(@campaign, character_id: personagem.id), style: 'outline-primary', method: :post
+                = btn 'Adicionar', campaign_campaign_characters_path(@campaign, character_id: personagem.id),
+                  style: 'outline-primary', method: :post

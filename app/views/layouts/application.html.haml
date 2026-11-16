@@ -27,7 +27,7 @@
             .ms-auto.d-flex.align-items-center
               = btn 'Campanhas', campaigns_path, style: 'outline-primary'
               = btn rotulo_avisos, avisos_path, style: 'outline-primary'
-              = btn 'Nova campanha', campaigns_path, style: 'outline-primary', method: :post
+              = btn 'Nova campanha', new_campaign_path, style: 'outline-primary'
               %details.nav-item.dropdown.ms-2
                 %summary.nav-link.d-flex.flex-column
                   %span= current_user.name

@@ -1,12 +1,23 @@
-= card @campaign.master,
-  actions: [ btn('Editar', edit_campaign_path(@campaign), style: 'outline-primary'),
-             btn('Excluir', campaign_path(@campaign), style: 'outline-danger', method: :delete, confirm: 'Deseja excluir a campanha?') ] do
+:ruby
+  path = campaign_path(@campaign)
+  acoes = if policy(@campaign).update?
+    [ btn('Editar', edit_campaign_path(@campaign), style: 'outline-primary'),
+      btn('Excluir', path, style: 'outline-danger', method: :delete, confirm: 'Deseja excluir a campanha?') ]
+  end
+
+= card @campaign.nome, actions: acoes do
   .card-body
     %p= @campaign.ativo ? 'Ativa' : 'Inativa'
+    %p= @campaign.master.name
     %p= @campaign.created_at.strftime('%d/%m/%Y')
+    - if @campaign.resumo.present?
+      = simple_format @campaign.resumo
     - if @campaign.campaign_characters.ativo.any?
       %ul
         - @campaign.campaign_characters.ativo.includes(character: :user).each do |vinculo|
-          %li= vinculo.character.name
+          %li.d-flex.flex-column
+            - if vinculo.character.avatar.attached?
+              = image_tag vinculo.character.avatar, class: 'rounded', width: 64
+            = vinculo.character.name
     - else
       %p.text-secondary Nenhum personagem nesta campanha.

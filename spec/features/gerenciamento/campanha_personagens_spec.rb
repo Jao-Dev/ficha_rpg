@@ -9,12 +9,18 @@ feature 'personagens da campanha' do
     let!(:personagem) { create(:character, name: 'Belerion', user: dono) }
 
     scenario 'busca por nome, agrupa por usuário e adiciona como pendente' do
+      personagem.avatar.attach(
+        io: Rails.root.join('spec/resources/dummies/dummy.png').open,
+        filename: 'dummy.png'
+      )
+
       logar_como master
       visit edit_campaign_path(campaign)
       fill_in 'Personagem', with: 'Belerion'
       click_button 'Buscar'
 
-      expect(page).to have_content 'Dono Um'
+      expect(page).to have_css '.nome-grupo', text: 'Dono Um'
+      expect(page).to have_css 'img'
       expect(page).to have_content 'Belerion'
       click_button 'Adicionar'
 
