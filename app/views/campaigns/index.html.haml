@@ -6,8 +6,10 @@
           = vinculo.character.name
           %span.badge.ms-2 Pendente
           .ms-auto.d-flex.align-items-center
-            = btn 'Confirmar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-primary', method: :patch
-            = btn 'Recusar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-danger', method: :delete
+            = btn 'Confirmar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-primary',
+              method: :patch
+            = btn 'Recusar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-danger',
+              method: :delete
 
 = card current_user.admin? ? 'Todas as campanhas' : 'Minhas campanhas' do
   - if @campanhas.any?

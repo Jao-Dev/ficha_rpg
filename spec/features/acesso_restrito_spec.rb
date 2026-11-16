@@ -41,8 +41,7 @@ feature 'acesso restrito' do
 
   scenario 'usuário não exclui campanha de outro usuário' do
     logar_como outro_usuario
-    visit campaign_path(campaign)
-    click_button 'Excluir'
+    page.driver.browser.process_and_follow_redirects(:delete, campaign_path(campaign))
 
     expect(page).to have_content 'Você não tem acesso a esta página.'
   end

@@ -31,8 +31,10 @@ mestre = users.find(&:mestre?)
 jogadores = users.select(&:jogador?)
 
 if mestre
-  campanha = Campaign.create!(master: mestre)
-  users.select(&:mestre?).drop(1).each { |outro_mestre| Campaign.create!(master: outro_mestre) }
+  campanha = Campaign.create!(master: mestre, nome: "Campanha de #{mestre.name}")
+  users.select(&:mestre?).drop(1).each do |outro_mestre|
+    Campaign.create!(master: outro_mestre, nome: "Campanha de #{outro_mestre.name}")
+  end
 
   jogadores.each_with_index do |jogador, indice|
     2.times { Character.create!(user: jogador, name: Faker::Name.name, race: racas.sample) }

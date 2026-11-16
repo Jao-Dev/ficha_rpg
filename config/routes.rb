@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :campaigns, only: [ :index, :show, :create, :edit, :update, :destroy ] do
+  resources :campaigns, only: [ :index, :new, :create, :show, :edit, :update, :destroy ] do
     resources :campaign_characters, only: [ :create, :update, :destroy ]
   end
 

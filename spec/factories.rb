@@ -44,6 +44,7 @@ FactoryBot.define do
   end
 
   factory :campaign do
+    nome { Faker::Lorem.words(number: 2).join(' ') }
     association :master, factory: :user
     ativo { true }
 

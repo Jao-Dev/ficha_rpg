@@ -6,5 +6,6 @@ class Campaign < ApplicationRecord
 
   belongs_to :master, class_name: "User"
 
+  validates :nome, presence: true
   validates :ativo, inclusion: { in: [ true, false ] }
 end

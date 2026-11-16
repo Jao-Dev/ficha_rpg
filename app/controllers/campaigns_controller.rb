@@ -28,12 +28,22 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def new
+    @campaign = Campaign.new
+    authorize @campaign
+  end
+
   def create
     @campaign = Campaign.new(master: current_user)
     authorize @campaign
+    @campaign.attributes = campaign_params
 
-    @campaign.save!
-    redirect_to campaign_path(@campaign), notice: "Campanha criada com sucesso."
+    if @campaign.save
+      redirect_to campaign_path(@campaign), notice: "Campanha criada com sucesso."
+    else
+      flash.now[:alert] = "Não foi possível salvar a campanha."
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -57,6 +67,6 @@ class CampaignsController < ApplicationController
   end
 
   def campaign_params
-    params.require(:campaign).permit(:ativo)
+    params.require(:campaign).permit(:nome, :resumo, :ativo)
   end
 end
