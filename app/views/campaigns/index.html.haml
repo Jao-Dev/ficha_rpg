@@ -11,11 +11,41 @@
             = btn 'Recusar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-danger',
               method: :delete
 
-= card current_user.admin? ? 'Todas as campanhas' : 'Minhas campanhas' do
+= card 'Busca' do
+  .card-body
+    = form_with url: campaigns_path, method: :get do |f|
+      .d-flex
+        .me-3
+          = f.label :q, 'Campanha ou mestre'
+          = f.text_field :q
+        .me-3
+          = f.label :status, 'Status'
+          = f.select :status, [ [ 'Todas', '' ], [ 'Ativa', 'ativa' ], [ 'Inativa', 'inativa' ] ]
+        .d-flex.align-items-end
+          = f.submit 'Buscar'
+
+= card 'Campanhas do usuário', actions: [ btn('Nova campanha', new_campaign_path, style: 'outline-primary') ] do
   - if @campanhas.any?
     %ul
       - @campanhas.each do |campaign|
-        %li= link_to campaign.master.name, campaign_path(campaign)
+        %li.d-flex.align-items-center
+          = link_to campaign.nome, campaign_path(campaign)
+          %span.ms-2= campaign.master.name
+          .ms-auto
+            = badge(campaign.ativo ? 'Ativa' : 'Inativa', style: campaign.ativo ? :success : :secondary)
   - else
-    .card-body.text-secondary
-      Nenhuma campanha ainda.
+    .card-body
+      = empty 'Você não participa de nenhuma campanha ainda.'
+
+= card 'Outras campanhas' do
+  - if @outras.any?
+    %ul
+      - @outras.each do |campaign|
+        %li.d-flex.align-items-center
+          = link_to campaign.nome, campaign_path(campaign)
+          %span.ms-2= campaign.master.name
+          .ms-auto
+            = badge(campaign.ativo ? 'Ativa' : 'Inativa', style: campaign.ativo ? :success : :secondary)
+  - else
+    .card-body
+      = empty 'Nenhuma outra campanha no sistema.'
