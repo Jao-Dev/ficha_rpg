@@ -4,7 +4,8 @@
       - @pendentes.each do |vinculo|
         %li.d-flex.align-items-center
           = vinculo.character.name
-          %span.badge.ms-2 Pendente
+          %span.ms-2
+            = badge 'Pendente'
           .ms-auto.d-flex.align-items-center
             = btn 'Confirmar', campaign_campaign_character_path(vinculo.campaign, vinculo), style: 'outline-primary',
               method: :patch

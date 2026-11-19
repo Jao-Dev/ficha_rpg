@@ -25,7 +25,8 @@
         - pendentes.each do |vinculo|
           %li.d-flex.align-items-center
             = vinculo.character.name
-            %span.badge.ms-2 Pendente
+            %span.ms-2
+              = badge 'Pendente'
             .ms-auto
               = btn 'Remover', caminho_remover.call(vinculo), style: 'outline-danger', method: :delete
 
