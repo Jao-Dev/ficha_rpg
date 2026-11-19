@@ -43,16 +43,18 @@ Ficha de RPG em Ruby/Rails:
 11. ~~**Rodar em produção com Docker Compose**~~ (concluído em 14/11/2026): `compose.yml` com 2 containers (app + Postgres 18); `database.yml` de produção lê host/usuário/senha de variáveis de ambiente; variáveis em `.env` (gitignored) documentadas em `.env.example`; entrypoint roda `db:prepare` no boot; seed bloqueado fora de desenvolvimento.
 12. **Sistema de rolagem de dados** (pedido em 15/11/2026): rolar dados a partir da ficha (ex.: notação `2d6+3`); detalhes de modelagem e interface a definir junto com o usuário (onde aparece o resultado, histórico de rolagens, se mestre vê as rolagens dos jogadores).
 13. ~~**Tela de campanhas**~~ (concluído em 19/11/2026): index com cards "Campanhas do usuário" (mestre ou participa) e "Outras campanhas" — todo mundo vê as duas seções, o ramo especial de admin saiu do código; cada campanha lista nome (link para a ficha) + mestre + badge Ativa/Inativa (componente `badge` da gem odeio_front_end); pesquisa combinável por texto (nome da campanha ou mestre) e select de status Todas/Ativa/Inativa; botão 'Nova campanha' saiu da navbar e virou ação no header do card (PR #69).
-14. **Avisos com tipo e show** (pedido em 16/11/2026): campo `tipo` no aviso; index exibe título = tipo, resumo da mensagem e é clicável; nova tela show — abrir um aviso marca só ele como lido.
+14. ~~**Avisos com tipo e show**~~ (concluído em 19/11/2026): campo `tipo` em `avisos` como enum (`inserido`/`confirmado`/`recusado`/`removido`, com labels pt-BR); index exibe título = tipo (link clicável), resumo truncado da mensagem e badge Lido/Não lido; rota e tela show — abrir um aviso marca só ele como lido, e o badge "Avisos (n)" do header conta os não lidos restantes; policy `show?` restrita ao dono; factory `:aviso` com traits por tipo (PR #71).
 15. **Ficha do personagem melhorada** (pedido em 16/11/2026): modularizar show e destacar a foto; anotações e história passam a ficar na ficha (show) e saem do form de edição; atualizar quantidade do item direto na linha (input pequeno + confirmar, sem abrir o Editar); textos dos itens/armas/efeitos maiores; botões de adicionar sem o tamanho reduzido.
 16. **Usar a gem odeio_front_end nas views** (criado em 19/11/2026): a gem já substituiu o `UiHelper` (card/alert/btn — PR #67); migrar gradualmente o restante — `btn` → `link_show`/`link_edit`/`link_new`/`link_destroy` nas views de CRUD, `%span.badge` → `badge`, `%p.text-secondary` de estado vazio → `empty`, listas com cabeçalho → `table` (avaliar caso a caso); aproveitar para os tamanhos dos botões que o item 15 pede; documentar o uso da gem em `docs/` (substituir o antigo ui_helper.md). Gem é pública (19/11/2026) — CI e build de produção puxam via `github:` sem credencial extra.
+17. **Factories em arquivos individuais** (pedido em 19/11/2026): dividir `spec/factories.rb` (user, character, campaign_character, aviso, campaign) em um arquivo por factory — `spec/factories/user_factory.rb`, `character_factory.rb` etc. (FactoryBot carrega todos os arquivos da pasta automaticamente).
 
 ## Pendências
 
 - ~~Telas do Devise no padrão Tabler~~ (concluído em 14/11/2026: views convertidas para cards Tabler com `TablerFormBuilder`; gem simple_form removido).
 - ~~SMTP de produção~~ (desistido em 14/11/2026).
 - ~~Convite por e-mail para usuário sem conta~~ (desistido em 14/11/2026).
-- **Tela de avisos** (pedido em 14/11/2026): tabela `avisos` (user, content, read_at, audited, scopes `:lidos`/`:nao_lidos`); link "Avisos (n)" no header quando há não lidos; abrir a tela marca tudo como lido. Avisos criados quando: mestre insere personagem (→ dono), dono confirma/recusa (→ mestre), mestre remove personagem (→ dono).
+- ~~**Tela de avisos**~~ (concluído — substituída pelo item 14: tabela `avisos`, badge "Avisos (n)" no header e as 4 criações nos controllers existem desde 14/11/2026; o item 14 completou com tipo, show e leitura individual).
+- **Ficha do personagem melhorada** → item 15 do backlog.
 
 ## Convenções do projeto
 
