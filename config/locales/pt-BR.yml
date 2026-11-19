@@ -1,6 +1,8 @@
 pt-BR:
   activerecord:
     attributes:
+      aviso:
+        tipo: Tipo
       character:
         name: Nome
         race: Raça
@@ -10,3 +12,9 @@ pt-BR:
         ativo: Ativo
       campaign:
         master: Mestre
+  avisos:
+    tipos:
+      inserido: Personagem inserido
+      confirmado: Personagem confirmado
+      recusado: Personagem recusado
+      removido: Personagem removido

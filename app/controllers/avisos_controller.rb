@@ -5,7 +5,12 @@ class AvisosController < ApplicationController
   def index
     authorize Aviso
 
-    current_user.avisos.nao_lidos.find_each { |aviso| aviso.update!(read_at: Time.current) }
     @avisos = current_user.avisos.order(created_at: :desc)
+  end
+
+  def show
+    @aviso = current_user.avisos.find(params[:id])
+    authorize @aviso
+    @aviso.update!(read_at: Time.current) unless @aviso.read_at
   end
 end

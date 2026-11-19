@@ -24,5 +24,5 @@ Rails.application.routes.draw do
     resources :campaign_characters, only: [ :create, :update, :destroy ]
   end
 
-  resources :avisos, only: [ :index ]
+  resources :avisos, only: [ :index, :show ]
 end

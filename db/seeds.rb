@@ -43,23 +43,23 @@ if mestre
     if indice.zero?
       personagens.each { |personagem| personagem.update!(campaign: campanha) }
       primeiro = personagens.first
-      Aviso.create!(user: jogador,
+      Aviso.create!(user: jogador, tipo: :inserido,
         content: "Seu personagem #{primeiro.name} foi inserido na campanha de #{mestre.name}.",
         read_at: agora)
-      Aviso.create!(user: mestre,
+      Aviso.create!(user: mestre, tipo: :confirmado,
         content: "#{jogador.name} confirmou o personagem #{primeiro.name} na sua campanha.")
     elsif indice == 1
       pendente = personagens.first
       CampaignCharacter.create!(campaign: campanha, character: pendente, status: :pendente)
       pendente.update!(campaign: campanha)
-      Aviso.create!(user: jogador,
+      Aviso.create!(user: jogador, tipo: :inserido,
         content: "Seu personagem #{pendente.name} foi inserido na campanha de #{mestre.name}.")
     end
   end
 
   if jogadores.size > 2
     terceiro = jogadores[2].characters.first
-    Aviso.create!(user: jogadores[2],
+    Aviso.create!(user: jogadores[2], tipo: :removido,
       content: "Seu personagem #{terceiro.name} foi removido da campanha de #{mestre.name}.")
   end
 end
