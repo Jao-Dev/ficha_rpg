@@ -54,6 +54,7 @@ feature 'gerenciar campanhas' do
   describe 'criar campanha' do
     scenario 'via formulário com nome e o criador se torna o mestre' do
       logar_como user
+      visit campaigns_path
       click_link 'Nova campanha'
       fill_in 'Nome', with: 'A Torre do Feiticeiro'
       click_button 'Criar campanha'
@@ -65,6 +66,7 @@ feature 'gerenciar campanhas' do
 
     scenario 'sem nome mostra erro' do
       logar_como user
+      visit campaigns_path
       click_link 'Nova campanha'
       click_button 'Criar campanha'
 

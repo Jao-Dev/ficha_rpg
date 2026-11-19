@@ -7,15 +7,20 @@ class CampaignsController < ApplicationController
   end
 
   def index
-    campanhas_de_personagens = CampaignCharacter.ativo
+    campanhas = Campaign.joins(:master).order(:nome)
+    if params[:q].present?
+      campanhas = campanhas.where(
+        "campaigns.nome ILIKE :busca OR users.name ILIKE :busca", busca: "%#{params[:q]}%"
+      )
+    end
+    campanhas = campanhas.where(ativo: params[:status] == "ativa") if params[:status].present?
+
+    participadas = CampaignCharacter.ativo
       .where(character_id: current_user.character_ids).select(:campaign_id)
 
-    @campanhas = if current_user.admin?
-      Campaign.all.includes(:master)
-    else
-      Campaign.where(master: current_user)
-        .or(Campaign.where(id: campanhas_de_personagens)).includes(:master)
-    end
+    @campanhas = campanhas.where(master: current_user)
+      .or(campanhas.where(id: participadas)).includes(:master)
+    @outras = campanhas.where.not(id: @campanhas).includes(:master)
     @pendentes = CampaignCharacter.pendente
       .where(character_id: current_user.character_ids).includes(:character, campaign: :master)
     authorize Campaign.new
