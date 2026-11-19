@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/Jao-Dev/odeio_front_end.git
+  revision: bd0d934a23ef01459afc6dc55396cecea0a5c7cb
+  specs:
+    odeio_front_end (0.1.0)
+      haml
+      rails (>= 7.2)
+      view_component
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -471,6 +480,10 @@ GEM
       activemodel
       mail (>= 2.6.1)
       simpleidn
+    view_component (4.24.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      prism (>= 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.3.0)
@@ -521,6 +534,7 @@ DEPENDENCIES
   kamal
   lefthook
   letter_opener
+  odeio_front_end!
   pg (~> 1.7)
   propshaft
   pry-rails
@@ -641,6 +655,7 @@ CHECKSUMS
   nokogiri (1.19.7-arm-linux-musl) sha256=28d0ff0c87b6bb2e56580323a6fb049d5d4a02b94f0958fdd47e9ac146991c77
   nokogiri (1.19.7-x86_64-linux-gnu) sha256=25865ccb462f714e712fdf8906fde07849cb6704a808e3d629d75baa5af5dd3b
   nokogiri (1.19.7-x86_64-linux-musl) sha256=464d1f3dfb0d53cf54c0c6a7e23e8e91cf68ec3cafc2b27dc4a7682f2d9bf546
+  odeio_front_end (0.1.0)
   orm_adapter (0.5.0) sha256=aa5d0be5d540cbb46d3a93e88061f4ece6a25f6e97d6a47122beb84fe595e9b9
   ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
   parallel (2.3.0) sha256=f75a3e904101ce6a1ccb6b8dc800cbafd42166d83330192438dcf29395167a6f
@@ -722,6 +737,7 @@ CHECKSUMS
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
   valid_attribute (2.0.0) sha256=963a580e1724c8a53ed5f0cc7a361eb51cc705e40f218d60d3b27bc8d9c8d6a9
   valid_email (0.2.1) sha256=79b06a7cc67a4aaeac731c940df775c4092623c455667e86d2a706acd3e9604f
+  view_component (4.24.0) sha256=03d47405cd63ea5c7154332b122cc24c50382b55e8f94eb2a269ce8ad73ae98a
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0
   web-console (4.3.0) sha256=e13b71301cdfc2093f155b5aa3a622db80b4672d1f2f713119cc7ec7ac6a6da4
   websocket (1.2.11) sha256=b7e7a74e2410b5e85c25858b26b3322f29161e300935f70a0e0d3c35e0462737
