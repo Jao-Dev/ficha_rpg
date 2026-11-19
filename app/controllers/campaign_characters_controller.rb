@@ -13,7 +13,7 @@ class CampaignCharactersController < ApplicationController
     else
       CampaignCharacter.create!(campaign: @campaign, character: character, status: :pendente)
       character.update!(campaign: @campaign)
-      Aviso.create!(user: character.user,
+      Aviso.create!(user: character.user, tipo: :inserido,
         content: "Seu personagem #{character.name} foi inserido na campanha de #{@campaign.master.name}.")
       redirect_to edit_campaign_path(@campaign), notice: "Personagem adicionado. Aguardando confirmação do dono."
     end
@@ -24,7 +24,7 @@ class CampaignCharactersController < ApplicationController
     authorize vinculo
 
     vinculo.update!(status: :ativo)
-    Aviso.create!(user: @campaign.master,
+    Aviso.create!(user: @campaign.master, tipo: :confirmado,
       content: "#{vinculo.character.user.name} confirmou o personagem #{vinculo.character.name} na sua campanha.")
     redirect_to campaigns_path, notice: "Personagem confirmado na campanha."
   end
@@ -39,10 +39,11 @@ class CampaignCharactersController < ApplicationController
     vinculo.character.update!(campaign: nil)
 
     if recusado
-      Aviso.create!(user: @campaign.master, content: "#{dono.name} recusou o personagem #{nome} na sua campanha.")
+      Aviso.create!(user: @campaign.master, tipo: :recusado,
+        content: "#{dono.name} recusou o personagem #{nome} na sua campanha.")
       redirect_to campaigns_path, notice: "Participação recusada."
     else
-      Aviso.create!(user: dono,
+      Aviso.create!(user: dono, tipo: :removido,
         content: "Seu personagem #{nome} foi removido da campanha de #{@campaign.master.name}.")
       redirect_to edit_campaign_path(@campaign), notice: "Personagem removido da campanha."
     end

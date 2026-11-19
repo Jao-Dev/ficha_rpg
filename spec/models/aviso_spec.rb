@@ -4,6 +4,7 @@ describe Aviso do
   describe 'Validacoes' do
     it { is_expected.not_to have_valid(:user).when(nil) }
     it { is_expected.not_to have_valid(:content).when(nil, '') }
+    it { is_expected.not_to have_valid(:tipo).when(nil, '', 'inexistente') }
   end
 
   describe 'scopes' do

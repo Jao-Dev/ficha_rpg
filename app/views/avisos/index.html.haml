@@ -2,7 +2,12 @@
   - if @avisos.any?
     %ul
       - @avisos.each do |aviso|
-        %li= aviso.content
+        %li.d-flex.align-items-center
+          = link_to aviso_path(aviso) do
+            %strong.me-2= t("avisos.tipos.#{aviso.tipo}")
+            = truncate(aviso.content, length: 80)
+          .ms-auto
+            = badge(aviso.read_at ? 'Lido' : 'Não lido', style: aviso.read_at ? :secondary : :primary)
   - else
-    .card-body.text-secondary
-      Nenhum aviso ainda.
+    .card-body
+      = empty 'Nenhum aviso ainda.'
