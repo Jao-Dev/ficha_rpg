@@ -56,6 +56,9 @@ gem "strong_migrations"
 gem "active_storage_validations"
 gem "valid_email"
 
+# componentes de front end reutilizáveis (github.com/Jao-Dev/odeio_front_end)
+gem "odeio_front_end", github: "Jao-Dev/odeio_front_end"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
